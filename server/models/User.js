@@ -28,6 +28,7 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Listing',
       index: true,
+      default: [],
     },
   ],
 });
