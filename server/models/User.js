@@ -19,12 +19,13 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  skills: [
+  listings: [
     {
-      type: String,
-      trim: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Listing',
+      index: true,
     },
-  ],
+  ]
 });
 
 // set up pre-save middleware to create password
