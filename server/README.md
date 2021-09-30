@@ -1,22 +1,22 @@
 # Create JSON Web Token (Back end)
 
-In this demo, you will create a profile and verify JSON Web Tokens to log into a profile.
+In this demo, you will create a user and verify JSON Web Tokens to log into a user.
 
 ## Instructions
 
 * Run `npm install` and `npm run seed` to set up the database.
 
-* Open [Profile.js](models/Profile.js) and explain the `save` hook and `isCorrectPassword` custom method:
+* Open [User.js](models/User.js) and explain the `save` hook and `isCorrectPassword` custom method:
 
-  * When a new profile is created, the password is automatically hashed using `bcrypt`.
+  * When a new user is created, the password is automatically hashed using `bcrypt`.
 
-  * When a user logs into their profile, we will execute the `isCorrectPassword` method to determine if the correct password was provided.
+  * When a user logs into their user, we will execute the `isCorrectPassword` method to determine if the correct password was provided.
 
 * Open [typeDefs.js](schemas/typeDefs.js) and explain the `Auth` and `Mutation` types:
 
-  * An `Auth` type returns a `token` and can include any other `Profile` data.
+  * An `Auth` type returns a `token` and can include any other `User` data.
 
-  * The `addProfile` mutation now takes in more profile information as input and returns an `Auth` object.
+  * The `addUser` mutation now takes in more user information as input and returns an `Auth` object.
 
   * A `login` mutation takes in an `email` and `password` and returns an `Auth` object.
 
@@ -36,7 +36,7 @@ In this demo, you will create a profile and verify JSON Web Tokens to log into a
 
     ```graphql
     query {
-      profiles {
+      users {
         email
         password
       }
