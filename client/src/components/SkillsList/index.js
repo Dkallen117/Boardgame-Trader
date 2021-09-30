@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useMutation } from '@apollo/client';
 
 import { REMOVE_SKILL } from '../../utils/mutations';
