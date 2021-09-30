@@ -34,6 +34,8 @@ const userSchema = new Schema({
     index: true,
     required: true,
   }
+}, {
+    timestamps: true,
 });
 
 const Listing = model('Listing', userSchema);
