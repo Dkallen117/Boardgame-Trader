@@ -31,6 +31,14 @@ const userSchema = new Schema({
       default: [],
     },
   ],
+  favorites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Listing',
+      index: true,
+      default: [],
+    }
+  ]
 });
 
 // set up pre-save middleware to create password
