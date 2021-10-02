@@ -8,5 +8,95 @@
         "genre": "classics",
         "seller": "61589758bb68a40d1cdf2f57",
         "img": "https://images.heb.com/is/image/HEBGrocery/001669716"
+    },
+    {
+        "_id": "6158ac2b7f9ca32c24d137de",
+        "title": "Monopoly",
+        "description": "it's monopoly, what else is there to say. We lost a few dollars, but you can still play",
+        "price": 10.25,
+        "quantity": 1,
+        "genre": "classics",
+        "seller": "6158a5fc1bd50948d0dec6ee",
+        "img": "https://target.scene7.com/is/image/Target/GUEST_bd9648a7-4b4c-4012-998a-c75f8b9780c3?wid=488&hei=488&fmt=pjpeg"
+    },
+    {
+        "_id": "6158ac2b7f9ca32c24d137df",
+        "title": "Clue, but slightly stained",
+        "description": "It's in fine condition, but my brother spilled coffee on the board",
+        "price": 7.32,
+        "quantity": 1,
+        "genre": "classics",
+        "seller": "6158a5fc1bd50948d0dec6ee",
+        "img": "https://m.media-amazon.com/images/I/81UqMAuZkkL._AC_SL1500_.jpg"
+    },
+    {
+        "_id": "6158b0db2f5bb42234125d2e",
+        "title": "Clue Liars Edition CHEAP",
+        "description": "It's ok. message me",
+        "price": 3.92,
+        "quantity": 1,
+        "genre": "classics",
+        "seller": "6158a5fc1bd50948d0dec6f0",
+        "img": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6421/6421880_sd.jpg"
+    },
+    {
+        "_id": "6158b0db2f5bb42234125d2f",
+        "title": "rare wooden chess set from the 1800s",
+        "description": "its real i swear. my grandpa gave it to me",
+        "price": 47.00,
+        "quantity": 1,
+        "genre": "classics",
+        "seller": "6158a5fc1bd50948d0dec6f2",
+        "img": "https://sw20536.smartweb-static.com/upload_dir/shop/products/legler/small-foot/LG-2044/LG-2044-chess-game-1.jpg"
+    },
+    {
+        "_id": "6158b0db2f5bb42234125d30",
+        "title": "boggle",
+        "description": "boggle",
+        "price": 17.00,
+        "quantity": 1,
+        "genre": "classics",
+        "seller": "6158a5fc1bd50948d0dec6f3",
+        "img": "https://m.media-amazon.com/images/I/81Gt6WBI2MS._AC_SX425_.jpg"
+    },
+    {
+        "_id": "6158b0db2f5bb42234125d31",
+        "title": "Ascension base set",
+        "description": "My friend bought me for my birthday, but I already have it",
+        "price": 37.10,
+        "quantity": 1,
+        "genre": "card",
+        "seller": "6158a5fc1bd50948d0dec6f4",
+        "img": "https://2f96be1b505f7f7a63c3-837c961929b51c21ec10b9658b068d6c.ssl.cf2.rackcdn.com/products/020016.jpg"
+    },
+    {
+        "_id": "6158b0db2f5bb42234125d32",
+        "title": "Bang! Good quality",
+        "description": "It's a fun game you can play at parties. You get to should BANG and it's funny everytime.",
+        "price": 25.74,
+        "quantity": 1,
+        "genre": "card",
+        "seller": "6158a5fc1bd50948d0dec6f2",
+        "img": "https://m.media-amazon.com/images/I/5113aA4cfCL._AC_.jpg"
+    },
+    {
+        "_id": "6158b29b1b8183220c010dbf",
+        "title": "settlers of catan",
+        "description": "catan",
+        "price": 13.37,
+        "quantity": 1,
+        "genre": "classics",
+        "seller": "6158a5fc1bd50948d0dec6f3",
+        "img": "https://m.media-amazon.com/images/I/5113aA4cfCL._AC_.jpg"
+    },
+    {
+        "_id": "6158b29b1b8183220c010dc0",
+        "title": "Trivial pursuit classic",
+        "description": "just the way you remember it. The pieces are slightly faded but still good",
+        "price": 29.68,
+        "quantity": 1,
+        "genre": "classics",
+        "seller": "6158a5fc1bd50948d0dec6f1",
+        "img": "https://www.thoughtco.com/thmb/Bvh55w372HIGM4PI9Q7pwY0FiyE=/1624x973/filters:fill(auto,1)/Trivial_Pursuit-59a52137685fbe001041c75b.jpg"
     }
 ]
