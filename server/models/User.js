@@ -2,15 +2,11 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-  first_name: {
+  username: {
     type: String,
     required: true,
     trim: true,
-  },
-  last_name: {
-    type: String,
-    required: true,
-    trim: true,
+    unique: true,
   },
   email: {
     type: String,
@@ -28,8 +24,17 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Listing',
       index: true,
+      default: [],
     },
   ],
+  favorites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Listing',
+      index: true,
+      default: [],
+    }
+  ]
 });
 
 // set up pre-save middleware to create password

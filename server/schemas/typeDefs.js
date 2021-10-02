@@ -3,10 +3,23 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type User {
     _id: ID
-    name: String
+    username: String
     email: String
     password: String
-    skills: [String]!
+    favorites: [Listing]
+    listings: [Listing]
+  }
+
+  type Listing {
+    _id: ID
+    title: String
+    description: String
+    quantity: Int
+    price: Float
+    available: Boolean
+    genre: String
+    seller: User
+    img: String
   }
 
   type Auth {
@@ -16,18 +29,16 @@ const typeDefs = gql`
 
   type Query {
     users: [User]!
+    listings: [Listing]!
     user(userId: ID!): User
-    # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
+    listing(listingId: ID!): Listing
     me: User
   }
 
   type Mutation {
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-
-    addSkill(userId: ID!, skill: String!): User
     removeUser: User
-    removeSkill(skill: String!): User
   }
 `;
 
