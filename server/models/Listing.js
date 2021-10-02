@@ -31,6 +31,10 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
+  },
+  img: {
+    type: String,
+    default: 'https://img.favpng.com/2/21/19/green-currency-dollar-symbol-font-png-favpng-C6VptbApxPTf0ws4hxyxtErCR.jpg'
   }
 }, {
     timestamps: true,
