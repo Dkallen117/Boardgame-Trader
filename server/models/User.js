@@ -2,6 +2,12 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+  },
   first_name: {
     type: String,
     required: true,

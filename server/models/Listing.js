@@ -8,7 +8,7 @@ const userSchema = new Schema({
   },
   description: {
     type: String,
-    max: [250, 'Description can only be 250 characters.']  
+    maxLength: [250, 'Description can only be 250 characters.']  
   },
   price: {
     type: Number,
@@ -18,7 +18,6 @@ const userSchema = new Schema({
     type: Number,
     required: true,
     default: 1,
-    min: [1, 'Must have at least one to sell.']
   },
   available: {
     type: Boolean,
@@ -31,7 +30,6 @@ const userSchema = new Schema({
   seller: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    index: true,
     required: true,
   }
 }, {
