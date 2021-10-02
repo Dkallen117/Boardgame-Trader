@@ -1,10 +1,12 @@
 [
     {
+        "_id": "6158a6c66c16fd0fd4735841",
         "title": "Sorry!",
         "description": "the classic game sorry. Slightly used.",
         "price": 20.11,
         "quantity": 1,
         "genre": "classics",
+        "seller": "61589758bb68a40d1cdf2f57",
         "img": "https://images.heb.com/is/image/HEBGrocery/001669716"
     }
 ]
