@@ -234,5 +234,4 @@ export default function Header() {
     </Box>
     </header>
   );
-}
-
+};
