@@ -31,6 +31,7 @@ const typeDefs = gql`
     users: [User]!
     listings: [Listing]!
     user(userId: ID!): User
+    listing(listingId: ID!): Listing
     me: User
   }
 
