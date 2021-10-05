@@ -22,6 +22,16 @@ const typeDefs = gql`
     img: String
   }
 
+  input ListingInput {
+    title: String
+    description: String
+    quantity: Int
+    price: Float
+    genre: String
+    seller: ID
+    img: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -38,6 +48,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addListing($listing: ListingInput): Listing
     removeUser: User
   }
 `;

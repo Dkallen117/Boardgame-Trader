@@ -48,6 +48,20 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    addListing: async (parent, { listing }, { user }) => {
+      // check for the user data to confirm logged in
+      if(user){
+        // create the new listing
+        const newListing = await Listing.create(listing);
+        // add the listing ID to the user's data
+        await User.findOneAndUpdate(
+          { _id: user._id },
+          { $addToSet: { listings: newListing._id } }
+        );
+        return newListing;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     // Set up mutation so a logged in user can only remove their user and no one else's
     removeUser: async (parent, args, context) => {
       if (context.user) {
