@@ -5,6 +5,10 @@ import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
@@ -41,53 +45,48 @@ const Login = (props) => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+    <Box
+component="form"
+sx={{
+  '& .MuiTextField-root': { m: 1, width: '25ch' },
+}}
+noValidate
+autoComplete="off"
+>
+<div>
+<TextField
+  required
+  id="filled-required"
+  label="Username"
+  defaultValue="Username"
+  variant="filled"
+  onChange={handleChange}
+/>
+<TextField
+  required
+  id="filled-required"
+  label="Email"
+  defaultValue="Email"
+  variant="filled"
+  value={formState.email}
+  onChange={handleChange}
+/>
+<TextField
+  id="filled-password-input"
+  label="Password"
+  type="password"
+  autoComplete="current-password"
+  variant="filled"
+  value={formState.password}
+  onChange={handleChange}
+/>
+</div>
+<Button onClick={() => {
+    handleFormSubmit();
+  }}
+ variant="contained">Contained</Button>
 
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </main>
+</Box>
   );
 };
 
