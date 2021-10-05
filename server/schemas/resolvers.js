@@ -62,6 +62,25 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    removeListing: async (parent, { listingId }, { user }) => {
+      // check for the user data to confirm logged in
+      if(user){
+        // remove the listing, matching the id and the seller id
+        await Listing.findOneAndDelete({ 
+          _id: listingId,
+          seller: user._id
+        });
+        // remove the listing ID from the user's data
+        const updatedList = await User.findOneAndUpdate(
+          { _id: user._id },
+          { $push: { listings: listingId } },
+          { new: true },
+        );
+        return updatedList;
+      }
+      
+      throw new AuthenticationError('You need to be logged in!');
+    },
     // Set up mutation so a logged in user can only remove their user and no one else's
     removeUser: async (parent, args, context) => {
       if (context.user) {

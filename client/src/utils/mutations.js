@@ -26,7 +26,7 @@ export const LOGIN_USER = gql`
 
 export const ADD_LISTING = gql`
   mutation addListing($listingInput: ListingInput) {
-    addListing(listing: listingInput) {
+    addListing(listing: $listingInput) {
       _id
       title
       description
@@ -35,6 +35,23 @@ export const ADD_LISTING = gql`
       available
       genre
       img
+    }
+  }
+`
+
+export const REMOVE_LISTING = gql`
+  mutation removeListing($listingId: ID!) {
+    removeListing(listing: $listingId) {
+      listings {
+        _id
+        title
+        description
+        quantity
+        price
+        available
+        genre
+        img
+      }
     }
   }
 `
