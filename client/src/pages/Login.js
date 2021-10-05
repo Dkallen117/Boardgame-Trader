@@ -56,6 +56,7 @@ autoComplete="off"
 <div>
 <TextField
   required
+  className="form-input"
   id="filled-required"
   label="Username"
   defaultValue="Username"
@@ -64,8 +65,10 @@ autoComplete="off"
 />
 <TextField
   required
+  className="form-input"
   id="filled-required"
   label="Email"
+  type="email"
   defaultValue="Email"
   variant="filled"
   value={formState.email}
