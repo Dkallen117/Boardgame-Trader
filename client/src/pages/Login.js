@@ -9,25 +9,34 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const Login = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
+export default function Login (props)  {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [open, setOpen] = React.useState(false);
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    console.log(name, value)
     setFormState({
       ...formState,
       [name]: value,
     });
+  
   };
 
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+   
     try {
+
       const { data } = await login({
         variables: { ...formState },
       });
@@ -38,10 +47,14 @@ const Login = (props) => {
     }
 
     // clear form values
-    setFormState({
-      email: '',
-      password: '',
-    });
+    setFormState({ email: '', password: '' });
+  
+
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -52,45 +65,62 @@ sx={{
 }}
 noValidate
 autoComplete="off"
+onSubmit={handleFormSubmit}
 >
 <div>
-<TextField
-  required
-  className="form-input"
-  id="filled-required"
-  label="Username"
-  defaultValue="Username"
-  variant="filled"
-  onChange={handleChange}
-/>
+  
 <TextField
   required
   className="form-input"
   id="filled-required"
   label="Email"
   type="email"
-  defaultValue="Email"
+  name="email"
   variant="filled"
-  value={formState.email}
+  defaultValue={formState.email}
   onChange={handleChange}
+  
 />
 <TextField
   id="filled-password-input"
   label="Password"
   type="password"
+  name="password"
   autoComplete="current-password"
   variant="filled"
-  value={formState.password}
+  defaultValue={formState.password}
   onChange={handleChange}
+  
+ 
 />
 </div>
-<Button onClick={() => {
-    handleFormSubmit();
-  }}
- variant="contained">Contained</Button>
-
+<Button  type="submit"
+ variant="contained"
+ >Contained</Button>
+<Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
 </Box>
   );
 };
 
-export default Login;
+
