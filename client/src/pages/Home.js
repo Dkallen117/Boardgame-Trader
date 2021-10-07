@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useQuery } from '@apollo/client';
 
-import ProfileList from '../components/GameList';
+import GameList from '../components/GameList';
 
-import { QUERY_PROFILES } from '../utils/queries';
+import { QUERY_ALL_LISTINGS } from '../utils/queries';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_PROFILES);
-  const profiles = data?.profiles || [];
+  const { loading, data } = useQuery(QUERY_ALL_LISTINGS);
+  const listings = data?.listings || [];
 
   return (
     <main>
@@ -16,8 +16,8 @@ const Home = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <ProfileList
-              profiles={profiles}
+            <GameList
+              listings ={listings}
               title="Here's the current roster of friends..."
             />
           )}
