@@ -16,17 +16,19 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Login (props)  {
-  //const [formState, setFormState] = useState({ username: '', email: '', password: '' });
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [formState, setFormState] = useState({ email: '', password: '' });
+
   const [login, { error, data }] = useMutation(LOGIN_USER);
   const [open, setOpen] = React.useState(false);
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    
+    console.log(name, value)
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  
   };
 
   // submit form
@@ -34,8 +36,9 @@ export default function Login (props)  {
     event.preventDefault();
    
     try {
+
       const { data } = await login({
-        variables: {  },
+        variables: { ...formState },
       });
 
       Auth.login(data.login.token);
@@ -44,6 +47,7 @@ export default function Login (props)  {
     }
 
     // clear form values
+    setFormState({ email: '', password: '' });
   
 
     setOpen(true);
@@ -55,53 +59,45 @@ export default function Login (props)  {
 
   return (
     <Box
-component="form"
-sx={{
-  '& .MuiTextField-root': { m: 1, width: '25ch' },
-}}
-noValidate
-autoComplete="off"
-onSubmit={handleFormSubmit}
->
-<div>
-  
-<TextField
-  required
-  className="form-input"
-  id="filled-required"
-  label="Username"
-  defaultValue={username}
-  variant="filled"
-  onChange={handleChange}
- 
-/>
-<TextField
-  required
-  className="form-input"
-  id="filled-required"
-  label="Email"
-  type="email"
-  variant="filled"
-  defaultValue={email}
-  onChange={handleChange}
-  
-/>
-<TextField
-  id="filled-password-input"
-  label="Password"
-  type="password"
-  autoComplete="current-password"
-  variant="filled"
-  defaultValue={password}
-  onChange={handleChange}
-  
- 
-/>
-</div>
-<Button  type="submit"
- variant="contained"
- >Contained</Button>
-<Dialog
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleFormSubmit}
+      >
+      <div>
+        
+      <TextField
+        required
+        className="form-input"
+        id="filled-required"
+        label="Email"
+        type="email"
+        name="email"
+        variant="filled"
+        defaultValue={formState.email}
+        onChange={handleChange}
+        
+      />
+      <TextField
+        id="filled-password-input"
+        label="Password"
+        type="password"
+        name="password"
+        autoComplete="current-password"
+        variant="filled"
+        defaultValue={formState.password}
+        onChange={handleChange}
+        
+      
+      />
+      </div>
+      <Button  type="submit"
+       variant="contained"
+       >Contained</Button>
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
