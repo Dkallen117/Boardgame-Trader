@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -28,20 +29,19 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const gameList = ({ listing, title }) => {
-  if (!listing.length) {
-    return <h3>No Profiles Yet</h3>;
-  }
 
-export default function GameList() {
+
+const List = ({ listings, title }) => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  return (
-     <Card sx={{ maxWidth: 345 }}>
+  <React.Fragment>     
+          {listings &&
+            listings.map((listing) => (
+              <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -55,7 +55,7 @@ export default function GameList() {
         }
         title={title}
         subheader="September 14, 2016"
-      />
+      ></CardHeader>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {listing.description}
@@ -95,7 +95,16 @@ export default function GameList() {
         </CardContent>
       </Collapse>
     </Card>
-  );
-};
+  ))};       
+</React.Fragment>
+  };
+export default function GameList(){
 
-}
+return(
+
+<Box>{List}</Box>
+);
+
+
+
+};
