@@ -16,17 +16,19 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Login (props)  {
-  //const [formState, setFormState] = useState({ username: '', email: '', password: '' });
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [formState, setFormState] = useState({ email: '', password: '' });
+
   const [login, { error, data }] = useMutation(LOGIN_USER);
   const [open, setOpen] = React.useState(false);
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    
+    console.log(name, value)
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  
   };
 
   // submit form
@@ -34,8 +36,9 @@ export default function Login (props)  {
     event.preventDefault();
    
     try {
+
       const { data } = await login({
-        variables: {  },
+        variables: { ...formState },
       });
 
       Auth.login(data.login.token);
@@ -44,6 +47,7 @@ export default function Login (props)  {
     }
 
     // clear form values
+    setFormState({ email: '', password: '' });
   
 
     setOpen(true);
@@ -69,20 +73,11 @@ onSubmit={handleFormSubmit}
   required
   className="form-input"
   id="filled-required"
-  label="Username"
-  defaultValue={username}
-  variant="filled"
-  onChange={handleChange}
- 
-/>
-<TextField
-  required
-  className="form-input"
-  id="filled-required"
   label="Email"
   type="email"
+  name="email"
   variant="filled"
-  defaultValue={email}
+  defaultValue={formState.email}
   onChange={handleChange}
   
 />
@@ -90,9 +85,10 @@ onSubmit={handleFormSubmit}
   id="filled-password-input"
   label="Password"
   type="password"
+  name="password"
   autoComplete="current-password"
   variant="filled"
-  defaultValue={password}
+  defaultValue={formState.password}
   onChange={handleChange}
   
  
