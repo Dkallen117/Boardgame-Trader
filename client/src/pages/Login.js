@@ -59,45 +59,45 @@ export default function Login (props)  {
 
   return (
     <Box
-component="form"
-sx={{
-  '& .MuiTextField-root': { m: 1, width: '25ch' },
-}}
-noValidate
-autoComplete="off"
-onSubmit={handleFormSubmit}
->
-<div>
-  
-<TextField
-  required
-  className="form-input"
-  id="filled-required"
-  label="Email"
-  type="email"
-  name="email"
-  variant="filled"
-  defaultValue={formState.email}
-  onChange={handleChange}
-  
-/>
-<TextField
-  id="filled-password-input"
-  label="Password"
-  type="password"
-  name="password"
-  autoComplete="current-password"
-  variant="filled"
-  defaultValue={formState.password}
-  onChange={handleChange}
-  
- 
-/>
-</div>
-<Button  type="submit"
- variant="contained"
- >Contained</Button>
-<Dialog
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleFormSubmit}
+      >
+      <div>
+        
+      <TextField
+        required
+        className="form-input"
+        id="filled-required"
+        label="Email"
+        type="email"
+        name="email"
+        variant="filled"
+        defaultValue={formState.email}
+        onChange={handleChange}
+        
+      />
+      <TextField
+        id="filled-password-input"
+        label="Password"
+        type="password"
+        name="password"
+        autoComplete="current-password"
+        variant="filled"
+        defaultValue={formState.password}
+        onChange={handleChange}
+        
+      
+      />
+      </div>
+      <Button  type="submit"
+       variant="contained"
+       >Contained</Button>
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
