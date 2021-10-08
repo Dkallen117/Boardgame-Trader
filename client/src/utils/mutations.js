@@ -25,7 +25,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_LISTING = gql`
-  mutation addListing($listingInput: ListingInput) {
+  mutation addListing($listingInput: ListingInput!) {
     addListing(listing: $listingInput) {
       _id
       title

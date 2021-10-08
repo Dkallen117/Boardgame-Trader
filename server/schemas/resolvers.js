@@ -50,10 +50,14 @@ const resolvers = {
       return { token, user };
     },
     addListing: async (parent, { listing }, { user }) => {
+      console.log(user)
       // check for the user data to confirm logged in
       if(user){
         // create the new listing
-        const newListing = await Listing.create(listing);
+        const newListing = await Listing.create({
+          ...listing,
+          seller: user._id
+        });
         // add the listing ID to the user's data
         await User.findOneAndUpdate(
           { _id: user._id },
