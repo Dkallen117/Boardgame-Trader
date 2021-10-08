@@ -86,6 +86,20 @@ const resolvers = {
       
       throw new AuthenticationError('You need to be logged in!');
     },
+    addFavorite: async (parent, { listingId }, { user }) => {
+      return User.findOneAndUpdate(
+        { _id: user._id },
+        { $addToSet: { favorites: listingId } },
+        { new: true },
+      );
+    },
+    removeFavorite: async (parent, { listingId }, { user }) => {
+      return User.findOneAndUpdate(
+        { _id: user._id },
+        { $push: { favorites: listingId } },
+        { new: true },
+      );
+    },
     // Set up mutation so a logged in user can only remove their user and no one else's
     removeUser: async (parent, args, context) => {
       if (context.user) {
