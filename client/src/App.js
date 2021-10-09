@@ -75,6 +75,9 @@ function App() {
             <Route exact path="/profiles/:profileId">
               <Profile />
             </Route>
+            <Route exact path="/messages">
+              <Messenger />
+            </Route>
           </div>
           <Footer />
         </div>

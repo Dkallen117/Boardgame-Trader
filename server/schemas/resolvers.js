@@ -26,14 +26,15 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { name, email, password }) => {
-      const user = await User.create({ name, email, password });
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
 
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+
+      const user = await User.findOne({ email: email });
 
       if (!user) {
         throw new AuthenticationError('No user with this email found!');
@@ -47,6 +48,39 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+    addListing: async (parent, { listing }, { user }) => {
+      // check for the user data to confirm logged in
+      if(user){
+        // create the new listing
+        const newListing = await Listing.create(listing);
+        // add the listing ID to the user's data
+        await User.findOneAndUpdate(
+          { _id: user._id },
+          { $addToSet: { listings: newListing._id } }
+        );
+        return newListing;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeListing: async (parent, { listingId }, { user }) => {
+      // check for the user data to confirm logged in
+      if(user){
+        // remove the listing, matching the id and the seller id
+        await Listing.findOneAndDelete({ 
+          _id: listingId,
+          seller: user._id
+        });
+        // remove the listing ID from the user's data
+        const updatedList = await User.findOneAndUpdate(
+          { _id: user._id },
+          { $push: { listings: listingId } },
+          { new: true },
+        );
+        return updatedList;
+      }
+      
+      throw new AuthenticationError('You need to be logged in!');
     },
     // Set up mutation so a logged in user can only remove their user and no one else's
     removeUser: async (parent, args, context) => {
