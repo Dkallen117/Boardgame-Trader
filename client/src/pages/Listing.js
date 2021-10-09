@@ -69,7 +69,7 @@ const Listing = () => {
             if(window.confirm(`Are you sure you want to delete your "${dataState.title}" listing?`)) {
                 await deleteListing();
                 alert('Listing deleted!');
-                window.location.replace('/profile');
+                window.location.assign('/profile');
             }
         } catch (e) {
             console.log(e);
