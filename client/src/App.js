@@ -22,6 +22,7 @@ import Setting from './pages/Setting';
 import Purchased from './pages/Purchased';
 import Message from './pages/Message';
 import Messenger from './components/Messenger';
+import Listing from './pages/Listing';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -80,6 +81,9 @@ function App() {
             </Route>
             <Route exact path="/new">
               <ListingForm />
+            </Route>
+            <Route exact path="/listing/:listingId">
+              <Listing />
             </Route>
             <Route exact path="/edit/:listingId">
               <EditListing />
