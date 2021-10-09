@@ -197,7 +197,7 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Button component={Link} to="/login" color = "inherit">Login</Button>
-            <IconButton size="large" aria-label="show 0 new mails" color="inherit">
+            <IconButton component={Link} to="/messenger" size="large" aria-label="messages" color="inherit">
               <Badge badgeContent={0} color="error">
                 <MailIcon />
               </Badge>
