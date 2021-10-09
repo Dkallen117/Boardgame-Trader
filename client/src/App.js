@@ -19,6 +19,7 @@ import OrderList from './pages/OrderList';
 import Setting from './pages/Setting';
 import Purchased from './pages/Purchased';
 import Message from './pages/Message';
+import Messenger from './components/Messenger';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -75,7 +76,7 @@ function App() {
             <Route exact path="/profiles/:profileId">
               <Profile />
             </Route>
-            <Route exact path="/messages">
+            <Route exact path="/message">
               <Messenger />
             </Route>
           </div>
