@@ -80,7 +80,7 @@ const EditListing = () => {
       const response = await editListing({
         variables: { listingId, listingInput: formState },
       });
-
+      window.location.assign(`/listing/${listingId}`)
     } catch (e) {
       console.error(e);
     }
