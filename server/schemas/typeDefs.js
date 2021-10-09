@@ -28,7 +28,6 @@ const typeDefs = gql`
     quantity: Int
     price: Float
     genre: String
-    seller: ID
     img: String
   }
 
@@ -49,7 +48,10 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addListing(listing: ListingInput!): Listing
+    editListing(listingId: ID!, listingInput: ListingInput!): Listing
     removeListing(listingId: ID!): User
+    addFavorite(listingId: ID!): User
+    removeFavorite(listingId: ID!): User
     removeUser: User
   }
 `;
