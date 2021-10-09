@@ -3,25 +3,16 @@ import {
   Avatar,
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Grid,
   Paper,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import OrderList from "./OrderList";
-import { Box } from "@mui/system";
 
 const userName = "Subash Sunuwar";
 
 const Hello = () => {
-  const onLinkClick = (event) => {
-    this.showComponent = true;
-  };
-
   return (
     <div>
       <Paper
@@ -63,10 +54,6 @@ const Hello = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {/* <Link href="#" variant="" onClick={() => this.onLinkClick}>
-          {"Order / Listing"}
-        </Link>
-        <br /> */}
         <a href="/OrderList" onClick={() => this.toggModal("Whatever")}>
           Order / Listing
         </a>
@@ -82,7 +69,7 @@ const Hello = () => {
         <a href="/setting" onClick={() => this.toggModal("Whatever")}>
           Setting
         </a>
-        <br />
+        <hr style={{marginTop: "20px"}} />
         <CardActions>
           <Button size="small">Log Out</Button>
         </CardActions>
@@ -91,7 +78,7 @@ const Hello = () => {
       <Card
         sx={{
           maxWidth: 400,
-          height: 125,
+          height: 500,
           my: 1,
           mx: "auto",
           p: 2,
@@ -102,7 +89,8 @@ const Hello = () => {
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {userName}'s Profile
-            <hr />
+            <hr style={{marginTop: "20px"}} />
+            
           </Typography>
         </CardContent>
         <CardActions>
