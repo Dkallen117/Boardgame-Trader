@@ -24,37 +24,41 @@ const Hello = () => {
 
   return (
     <div>
-      {/* <div>{this.showComponent ? <OrderList /> : null}</div> */}
-
-      {/* <Card sx={{ maxWidth: 345 }} >
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            alt="User Avatar"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              User Name
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card> */}
-
-      <Paper sx={{ maxWidth: 500, my: 1, mx: "auto", p: 2 }}>
+      <Paper
+        sx={{
+          maxWidth: 400,
+          height: 125,
+          my: 1,
+          mx: "auto",
+          p: 2,
+          backgroundColor: "#C9D1D7",
+          color: "#437A85",
+        }}
+      >
         <Grid container wrap="nowrap" spacing={0}>
           <Grid item>
-            <Avatar>S</Avatar>
+            <Avatar>{userName.charAt(0)}</Avatar>
           </Grid>
           <Grid item xs>
-            <Typography>{userName}</Typography>
+            <Typography
+              style={{ paddingLeft: "0.5625rem", marginTop: "0.4375rem" }}
+            >
+              {userName}
+            </Typography>
           </Grid>
         </Grid>
       </Paper>
 
       <Card
-        sx={{ maxWidth: 500, my: 1, mx: "auto", p: 2 }}
+        sx={{
+          maxWidth: 400,
+          height: 175,
+          my: 1,
+          mx: "auto",
+          p: 2,
+          backgroundColor: "#C9D1D7",
+          color: "#437A85",
+        }}
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
@@ -84,10 +88,20 @@ const Hello = () => {
         </CardActions>
       </Card>
 
-      <Card sx={{ maxWidth: 500, my: 1, mx: "auto", p: 2 }}>
+      <Card
+        sx={{
+          maxWidth: 400,
+          height: 125,
+          my: 1,
+          mx: "auto",
+          p: 2,
+          backgroundColor: "#FDFDFD",
+          color: "#437A85",
+        }}
+      >
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            User Profile
+            {userName}'s Profile
             <hr />
           </Typography>
         </CardContent>
