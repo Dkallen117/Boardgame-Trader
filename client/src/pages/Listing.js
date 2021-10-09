@@ -5,7 +5,7 @@ import { Grid, Button } from '@mui/material';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_SINGLE_LISTING } from '../utils/queries';
-import { ADD_FAVORITE } from '../utils/mutations';
+import { ADD_FAVORITE, REMOVE_LISTING } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 import { Local } from '../utils/local';
@@ -44,7 +44,10 @@ const Listing = () => {
         }
     });
 
-    const [saveFavorite, mutation] = useMutation(ADD_FAVORITE, {
+    const [saveFavorite, favMutation] = useMutation(ADD_FAVORITE, {
+        variables: { listingId }
+    });
+    const [deleteListing, deleteMutation] = useMutation(REMOVE_LISTING, {
         variables: { listingId }
     });
 
@@ -61,6 +64,17 @@ const Listing = () => {
         }
     }
 
+    const handleDelete = async () => {
+        try {
+            if(window.confirm(`Are you sure you want to delete your "${dataState.title}" listing?`)) {
+                await deleteListing();
+                alert('Listing deleted!');
+                window.location.replace('/profile');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
     
     console.log(data?.listing.seller.username, userData?.data.username)
     return(
@@ -85,7 +99,11 @@ const Listing = () => {
                                             href={`/edit/${listingId}`}
                                             style={{marginBottom: "1%"}}
                                         >Edit</Button>
-                                        <Button variant='contained' fullWidth>Delete</Button>
+                                        <Button 
+                                            variant='contained' 
+                                            fullWidth
+                                            onClick={handleDelete}
+                                        >Delete</Button>
                                     </Grid>
                                 ) : (
                                     <Grid item xs={12}>
