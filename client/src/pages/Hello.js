@@ -59,24 +59,24 @@ const Hello = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        <Link href="#" variant="" onClick={() => this.onLinkClick}>
+        {/* <Link href="#" variant="" onClick={() => this.onLinkClick}>
           {"Order / Listing"}
         </Link>
-        <br />
-        <a href="/" onClick={() => this.toggModal("Whatever")}>
+        <br /> */}
+        <a href="/OrderList" onClick={() => this.toggModal("Whatever")}>
           Order / Listing
         </a>
         <br />
-        <a href="/" onClick={() => this.toggModal("Whatever")}>
+        <a href="/message" onClick={() => this.toggModal("Whatever")}>
           Message
         </a>
         <br />
-        <a href="/orderlist" onClick={() => this.toggModal("Whatever")}>
+        <a href="/purchased" onClick={() => this.toggModal("Whatever")}>
           Purchased
         </a>
         <br />
-        <a href="/settings" onClick={() => this.toggModal("Whatever")}>
-          Settings
+        <a href="/setting" onClick={() => this.toggModal("Whatever")}>
+          Setting
         </a>
         <br />
         <CardActions>

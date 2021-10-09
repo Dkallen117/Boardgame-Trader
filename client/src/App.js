@@ -16,6 +16,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Hello from './pages/Hello';
 import OrderList from './pages/OrderList';
+import Setting from './pages/Setting';
+import Purchased from './pages/Purchased';
+import Message from './pages/Message';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -57,8 +60,17 @@ function App() {
             <Route exact path="/orderList">
               <OrderList />
             </Route>
+            <Route exact path="/Setting">
+              <Setting />
+            </Route>
+            <Route exact path="/message">
+              <Message />
+            </Route>
             <Route exact path="/profile">
               <Hello />
+            </Route>
+            <Route exact path="/purchased">
+              <Purchased/>
             </Route>
             <Route exact path="/profiles/:profileId">
               <Profile />
