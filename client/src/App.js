@@ -20,7 +20,7 @@ import Hello from './pages/Hello';
 import OrderList from './pages/OrderList';
 import Setting from './pages/Setting';
 import Purchased from './pages/Purchased';
-import Messenger from './pages/Message';
+import Messenger from './pages/Messenger';
 import Listing from './pages/Listing';
 
 const httpLink = createHttpLink({
