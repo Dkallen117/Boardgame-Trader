@@ -73,7 +73,7 @@ export const REMOVE_LISTING = gql`
 
 export const ADD_FAVORITE = gql`
 mutation addFavorite($listingId: ID!) {
-  addFavorite(listing: $listingId) {
+  addFavorite(listingId: $listingId) {
     favorites {
       _id
       title
@@ -90,7 +90,7 @@ mutation addFavorite($listingId: ID!) {
 
 export const REMOVE_FAVORITE = gql`
 mutation removeFavorite($listingId: ID!) {
-  removeFavorite(listing: $listingId) {
+  removeFavorite(listingId: $listingId) {
     favorites {
       _id
       title
