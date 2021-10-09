@@ -13,6 +13,7 @@ const listingSchema = new Schema({
   price: {
     type: Number,
     required: true,
+    default: 0.00,
   },
   quantity: {
     type: Number,

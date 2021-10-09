@@ -34,8 +34,6 @@ export default function Login (props)  {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("This is the form state",formState);
-   
     try {
 
       const { data } = await login({

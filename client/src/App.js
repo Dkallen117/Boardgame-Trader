@@ -14,6 +14,8 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ListingForm from './components/ListingForm'
+import EditListing from './components/EditListing'
 import Hello from './pages/Hello';
 import OrderList from './pages/OrderList';
 import Setting from './pages/Setting';
@@ -75,6 +77,12 @@ function App() {
             </Route>
             <Route exact path="/profiles/:profileId">
               <Profile />
+            </Route>
+            <Route exact path="/new">
+              <ListingForm />
+            </Route>
+            <Route exact path="/edit/:listingId">
+              <EditListing />
             </Route>
             <Route exact path="/message">
               <Messenger />
