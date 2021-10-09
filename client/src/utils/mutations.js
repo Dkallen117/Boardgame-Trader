@@ -39,6 +39,21 @@ export const ADD_LISTING = gql`
   }
 `
 
+export const EDIT_LISTING = gql`
+  mutation editListing($listingId: ID!, $listingInput: ListingInput!) {
+    editListing(listingId: $listingId, listingInput: $listingInput) {
+      _id
+      title
+      description
+      quantity
+      price
+      available
+      genre
+      img
+    }
+  }
+`
+
 export const REMOVE_LISTING = gql`
   mutation removeListing($listingId: ID!) {
     removeListing(listing: $listingId) {

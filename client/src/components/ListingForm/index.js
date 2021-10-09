@@ -35,6 +35,13 @@ const ListingForm = () => {
           ...formState,
           price: parseFloat(value),
         });
+        break;
+      case 'quantity': 
+        setFormState({
+          ...formState,
+          quantity: parseInt(value),
+        });
+        break;
     }
     console.log(formState)
   };
@@ -50,12 +57,10 @@ const ListingForm = () => {
         alert('Log in foo');
         return false
       }
-
+      
       const response = await addUser({
         variables: { listingInput: formState },
       });
-
-      Auth.login(response.data.addListing.token);
     } catch (e) {
       console.error(e);
     }

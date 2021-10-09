@@ -86,6 +86,13 @@ const resolvers = {
       
       throw new AuthenticationError('You need to be logged in!');
     },
+    editListing: async (parent, {listingId, listingInput}, { user }) => {
+      return Listing.findOneAndUpdate(
+        { _id: listingId, seller: user._id },
+        { ...listingInput },
+        { new: true },
+      )
+    },
     addFavorite: async (parent, { listingId }, { user }) => {
       return User.findOneAndUpdate(
         { _id: user._id },

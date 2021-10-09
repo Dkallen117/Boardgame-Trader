@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ListingForm from './components/ListingForm'
+import EditListing from './components/EditListing'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -61,6 +62,9 @@ function App() {
             </Route>
             <Route exact path="/new">
               <ListingForm />
+            </Route>
+            <Route exact path="/edit/:listingId">
+              <EditListing />
             </Route>
           </div>
           <Footer />
