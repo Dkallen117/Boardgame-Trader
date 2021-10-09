@@ -99,6 +99,11 @@ const Hello = () => {
             >
               {userName}'s Profile
               <hr style={{ marginTop: "20px" }} />
+              <Card xs={3}>
+                <label style={{ color: '#C9D1D7', paddingLeft: '9px', alignItems: 'center'}}>First Name: {userName.substr(0,6)}</label><br />
+                <label style={{ color: '#C9D1D7', paddingLeft: '9px', alignItems: 'center'}}>Last Name: {userName.substr(7, 7)}</label><br />
+                <label style={{ color: '#C9D1D7', paddingLeft: '9px', alignItems: 'center'}}>Email: user-email@gmail.com</label>
+              </Card>
             </Typography>
           </CardContent>
           <CardActions>
