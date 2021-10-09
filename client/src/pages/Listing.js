@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import { Container, Grid, Button } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_SINGLE_LISTING } from '../utils/queries';
@@ -13,7 +13,7 @@ import { Local } from '../utils/local';
 const Listing = () => {
     const { listingId } = useParams();
     const userData = Auth.getProfile();
-    const favorited = Local.getFavorites().includes(listingId) || false
+    let favorited = Local.getFavorites().includes(listingId) || false
     console.log('favorited', favorited)
 
     const [ dataState, setDataState ] = useState({
@@ -50,9 +50,12 @@ const Listing = () => {
 
     const handleSaveFavorite = async () => {
         try {
-            const confirmed = await saveFavorite();
-            console.log(confirmed);
+            await saveFavorite();
             Local.addFavorite(listingId);
+            setDataState({
+                ...dataState,
+                favorited: true,
+            });
         } catch (e) {
             console.log(e)
         }
@@ -87,7 +90,7 @@ const Listing = () => {
                                 ) : (
                                     <Grid item xs={12}>
                                         <Button
-                                            disabled={favorited}
+                                            disabled={dataState.favorited}
                                             variant='contained' 
                                             fullWidth 
                                             style={{marginBottom: "1%"}}
