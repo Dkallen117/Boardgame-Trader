@@ -196,7 +196,9 @@ export default function Header() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button component={Link} to="/login" color = "inherit">Login</Button>
+          { Auth.loggedIn() ? (
+            <>
+            <Button color = "inherit" onClick={Auth.logout}>Logout</Button>
             <IconButton component={Link} to="/messenger" size="large" aria-label="messages" color="inherit">
               <Badge badgeContent={0} color="error">
                 <MailIcon />
@@ -222,6 +224,10 @@ export default function Header() {
             >
               <AccountCircle />
             </IconButton>
+            </>
+          ) : (
+            <Button component={Link} to="/login" color = "inherit">Login</Button>
+          )}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
