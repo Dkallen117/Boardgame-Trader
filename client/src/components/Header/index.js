@@ -108,6 +108,7 @@ export default function Header() {
           component={Link} 
           to="/profile" >Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={Auth.logout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -190,7 +191,7 @@ export default function Header() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Coming Soon..."
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
@@ -198,7 +199,9 @@ export default function Header() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           { Auth.loggedIn() ? (
             <>
-            <Button color = "inherit" onClick={Auth.logout}>Logout</Button>
+            <Typography sx={{ display: 'flex', alignItems: 'center' }}>
+              Welcome {Auth.getProfile().data.username}!
+            </Typography>
             <IconButton component={Link} to="/messenger" size="large" aria-label="messages" color="inherit">
               <Badge badgeContent={0} color="error">
                 <MailIcon />
