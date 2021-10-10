@@ -80,6 +80,8 @@ const Signup = () => {
         onChange={handleChange}
       />
       <TextField
+        required
+        className="form-input"
         id="filled-password-input"
         label="Password"
         type="password"
@@ -94,7 +96,7 @@ const Signup = () => {
       </div>
       <Button  type="submit"
        variant="contained"
-       >Submit</Button>
+       >Sign Up</Button>
   </Box>
   );
 };
