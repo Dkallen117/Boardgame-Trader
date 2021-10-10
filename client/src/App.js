@@ -14,7 +14,14 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Messenger from './components/Messenger';
+import ListingForm from './components/ListingForm'
+import EditListing from './components/EditListing'
+import Hello from './pages/Hello';
+import OrderList from './pages/OrderList';
+import Setting from './pages/Setting';
+import Purchased from './pages/Purchased';
+import Messenger from './pages/Messenger';
+import Listing from './pages/Listing';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -53,14 +60,32 @@ function App() {
             <Route exact path="/signup">
               <Signup />
             </Route>
-            <Route exact path="/me">
-              <Profile />
+            <Route exact path="/orderList">
+              <OrderList />
+            </Route>
+            <Route exact path="/Setting">
+              <Setting />
+            </Route>
+            <Route exact path="/messenger">
+              <Messenger />
+            </Route>
+            <Route exact path="/profile">
+              <Hello />
+            </Route>
+            <Route exact path="/purchased">
+              <Purchased/>
             </Route>
             <Route exact path="/profiles/:profileId">
               <Profile />
             </Route>
-            <Route exact path="/messages">
-              <Messenger />
+            <Route exact path="/new">
+              <ListingForm />
+            </Route>
+            <Route exact path="/listing/:listingId">
+              <Listing />
+            </Route>
+            <Route exact path="/edit/:listingId">
+              <EditListing />
             </Route>
           </div>
           <Footer />

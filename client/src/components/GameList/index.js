@@ -92,5 +92,3 @@ export default function GameList(props) {
       </Collapse>
     </Card>
   )};       
-
-  

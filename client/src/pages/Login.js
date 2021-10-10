@@ -34,7 +34,7 @@ export default function Login (props)  {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-   
+   console.log(formState)
     try {
 
       const { data } = await login({
@@ -79,9 +79,10 @@ export default function Login (props)  {
         variant="filled"
         defaultValue={formState.email}
         onChange={handleChange}
-        
       />
       <TextField
+        required
+        className="form-input"
         id="filled-password-input"
         label="Password"
         type="password"
@@ -90,13 +91,14 @@ export default function Login (props)  {
         variant="filled"
         defaultValue={formState.password}
         onChange={handleChange}
-        
-      
       />
       </div>
       <Button  type="submit"
        variant="contained"
-       >Contained</Button>
+      >Log In</Button>
+      <Button  href={`/signup`}
+        variant='contained'
+      >Need an account?</Button>
       <Dialog
         open={open}
         onClose={handleClose}

@@ -25,8 +25,23 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_LISTING = gql`
-  mutation addListing($listingInput: ListingInput) {
+  mutation addListing($listingInput: ListingInput!) {
     addListing(listing: $listingInput) {
+      _id
+      title
+      description
+      quantity
+      price
+      available
+      genre
+      img
+    }
+  }
+`
+
+export const EDIT_LISTING = gql`
+  mutation editListing($listingId: ID!, $listingInput: ListingInput!) {
+    editListing(listingId: $listingId, listingInput: $listingInput) {
       _id
       title
       description
@@ -41,7 +56,7 @@ export const ADD_LISTING = gql`
 
 export const REMOVE_LISTING = gql`
   mutation removeListing($listingId: ID!) {
-    removeListing(listing: $listingId) {
+    removeListing(listingId: $listingId) {
       listings {
         _id
         title
@@ -54,4 +69,38 @@ export const REMOVE_LISTING = gql`
       }
     }
   }
+`
+
+export const ADD_FAVORITE = gql`
+mutation addFavorite($listingId: ID!) {
+  addFavorite(listingId: $listingId) {
+    favorites {
+      _id
+      title
+      description
+      quantity
+      price
+      available
+      genre
+      img
+    }
+  }
+}
+`
+
+export const REMOVE_FAVORITE = gql`
+mutation removeFavorite($listingId: ID!) {
+  removeFavorite(listingId: $listingId) {
+    favorites {
+      _id
+      title
+      description
+      quantity
+      price
+      available
+      genre
+      img
+    }
+  }
+}
 `
