@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -16,8 +16,6 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-import { Link } from 'react-router-dom';
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -31,17 +29,15 @@ const ExpandMore = styled((props) => {
 
 
 
-const List = ({ listings, title }) => {
+export default function GameList(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  <React.Fragment>     
-          {listings &&
-            listings.map((listing) => (
-              <Card sx={{ maxWidth: 345 }}>
+  
+  return(
+  <Card>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -53,12 +49,12 @@ const List = ({ listings, title }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
+        title={props.title}
         subheader="September 14, 2016"
       ></CardHeader>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {listing.description}
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -81,13 +77,13 @@ const List = ({ listings, title }) => {
         <CardContent>
           <Typography paragraph>Listing Details:</Typography>
           <Typography >
-           {listing.price}
+           {props.price}
           </Typography>
           <Typography >
-          {listing.quantity}
+          {props.quantity}
           </Typography>
           <Typography >
-          {listing.genre}
+          {props.genre}
           </Typography>
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then serve.
@@ -95,16 +91,6 @@ const List = ({ listings, title }) => {
         </CardContent>
       </Collapse>
     </Card>
-  ))};       
-</React.Fragment>
-  };
-export default function GameList(){
+  )};       
 
-return(
-
-<Box>{List}</Box>
-);
-
-
-
-};
+  
