@@ -50,7 +50,6 @@ const resolvers = {
       return { token, user };
     },
     addListing: async (parent, { listing }, { user }) => {
-      console.log(user)
       // check for the user data to confirm logged in
       if(user){
         // create the new listing
