@@ -27,7 +27,6 @@ const Listing = () => {
         favorited: favorited,
     });
 
-    
     const { data, loading } = useQuery(QUERY_SINGLE_LISTING, {
         variables: { listingId },
         onCompleted: () => {
