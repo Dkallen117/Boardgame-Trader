@@ -5,112 +5,161 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardMedia,
   Grid,
   Paper,
   Typography,
 } from "@mui/material";
+// import { useQuery } from "@apollo/client";
+// import { QUERY_ME } from "../utils/queries";
 
 const userName = "Subash Sunuwar";
 
 const Hello = () => {
+  // const data = useQuery(QUERY_ME);
+  // console.log(data);
   return (
     <div>
-      <Grid container spacing={3} style={{marginTop: '9px'}}> 
-      <Grid xs={4}>
-        <Paper
-          sx={{
-            maxWidth: 400,
-            height: 125,
-            my: 1,
-            mx: "auto",
-            p: 2,
-            backgroundColor: "#C9D1D7",
-            color: "#437A85",
-          }}
-        >
-          <Grid container wrap="nowrap" spacing={0}>
-            <Grid item>
-              <Avatar>{userName.charAt(0)}</Avatar>
+      <Grid container spacing={3} style={{ marginTop: "9px" }}>
+        <Grid xs={4}>
+          <Paper
+            sx={{
+              maxWidth: 400,
+              height: 125,
+              my: 1,
+              mx: "auto",
+              p: 2,
+              backgroundColor: "#C9D1D7",
+              color: "#437A85",
+            }}
+          >
+            <Grid container wrap="nowrap" spacing={0}>
+              <Grid item>
+                <Avatar>{userName.charAt(0)}</Avatar>
+              </Grid>
+              <Grid item>
+                <Typography
+                  style={{ paddingLeft: "0.5625rem", marginTop: "0.4375rem" }}
+                >
+                  {userName}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item>
+          </Paper>
+
+          <Card
+            style={{ lineHeight: "2" }}
+            sx={{
+              maxWidth: 400,
+              height: 215,
+              my: 1,
+              mx: "auto",
+              p: 2,
+              backgroundColor: "#C9D1D7",
+              color: "#437A85",
+            }}
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
+            <a href="/OrderList" onClick={() => this.toggModal("Whatever")}>
+              Order / Listing
+            </a>
+            <br />
+            <a href="/message" onClick={() => this.toggModal("Whatever")}>
+              Message
+            </a>
+            <br />
+            <a href="/purchased" onClick={() => this.toggModal("Whatever")}>
+              Purchased
+            </a>
+            <br />
+            <a href="/setting" onClick={() => this.toggModal("Whatever")}>
+              Setting
+            </a>
+            <hr style={{ marginTop: "20px" }} />
+            <CardActions>
+              <Button size="small">Log Out</Button>
+            </CardActions>
+          </Card>
+        </Grid>
+
+        <Grid xs={7} style={{ marginLeft: "7px" }}>
+          <Card
+            sx={{
+              maxWidth: "100%",
+              height: 348,
+              my: 1,
+              mx: "auto",
+              p: 2,
+              backgroundColor: "#FDFDFD",
+              color: "#437A85",
+            }}
+          >
+            <CardContent>
               <Typography
-                style={{ paddingLeft: "0.5625rem", marginTop: "0.4375rem" }}
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
               >
-                {userName}
+                {userName}'s Profile
+                <hr style={{ marginTop: "20px" }} />
+                <Grid container>
+                  <Grid xs={7} spacing={2}>
+                    <Card style={{ paddingTop: "7px", height: "150px" }}>
+                      <label
+                        style={{
+                          color: "#C9D1D7",
+                          paddingLeft: "9px",
+                          alignItems: "center",
+                        }}
+                      >
+                        First Name: {userName.substr(0, 6)}
+                        {/* First Name: {data.me.username.substr(0, 6)} */}
+                      </label>
+                      <br />
+                      <label
+                        style={{
+                          color: "#C9D1D7",
+                          paddingLeft: "9px",
+                          alignItems: "center",
+                        }}
+                      >
+                        Last Name: {userName.substr(7, 7)}
+                      </label>
+                      <br />
+                      <label
+                        style={{
+                          color: "#C9D1D7",
+                          paddingLeft: "9px",
+                          alignItems: "center",
+                        }}
+                      >
+                        Email: user-email@gmail.com
+                      </label>
+                      <CardActions style={{ marginTop: "29px" }}>
+                        <Button size="small">Change Password</Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                  <Grid xs={3} style={{ marginLeft: "7px" }}>
+                    <Card style={{ width: "263px" }}>
+                      <CardMedia
+                        component="img"
+                        height="150"
+                        image="/ProfileImage"
+                        alt="Profile Image"
+                      />
+                    </Card>
+                  </Grid>
+                </Grid>
               </Typography>
-            </Grid>
-          </Grid>
-        </Paper>
-
-        <Card style={{ lineHeight: "2"}}
-          sx={{
-            maxWidth: 400,
-            height: 215,
-            my: 1,
-            mx: "auto",
-            p: 2,
-            backgroundColor: "#C9D1D7",
-            color: "#437A85",
-          }}
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
-          <a href="/OrderList" onClick={() => this.toggModal("Whatever")}>
-            Order / Listing
-          </a>
-          <br />
-          <a href="/message" onClick={() => this.toggModal("Whatever")}>
-            Message
-          </a>
-          <br />
-          <a href="/purchased" onClick={() => this.toggModal("Whatever")}>
-            Purchased
-          </a>
-          <br />
-          <a href="/setting" onClick={() => this.toggModal("Whatever")}>
-            Setting
-          </a>
-          <hr style={{ marginTop: "20px" }} />
-          <CardActions>
-            <Button size="small">Log Out</Button>
-          </CardActions>
-        </Card>
-      </Grid>
-      
-
-      <Grid xs={7} style={{marginLeft: '7px'}}>
-        <Card
-          sx={{
-            maxWidth: '100%',
-            height: 500,
-            my: 1,
-            mx: "auto",
-            p: 2,
-            backgroundColor: "#FDFDFD",
-            color: "#437A85",
-          }}
-        >
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              {userName}'s Profile
-              <hr style={{ marginTop: "20px" }} />
-              <Card xs={3}>
-                <label style={{ color: '#C9D1D7', paddingLeft: '9px', alignItems: 'center'}}>First Name: {userName.substr(0,6)}</label><br />
-                <label style={{ color: '#C9D1D7', paddingLeft: '9px', alignItems: 'center'}}>Last Name: {userName.substr(7, 7)}</label><br />
-                <label style={{ color: '#C9D1D7', paddingLeft: '9px', alignItems: 'center'}}>Email: user-email@gmail.com</label>
-              </Card>
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Edit Profile</Button>
-          </CardActions>
-        </Card>
-      </Grid>
+            </CardContent>
+            <CardActions style={{ marginTop: "29px" }}>
+              <Button size="small">Edit Profile</Button>
+            </CardActions>
+          </Card>
+        </Grid>
       </Grid>
     </div>
   );
