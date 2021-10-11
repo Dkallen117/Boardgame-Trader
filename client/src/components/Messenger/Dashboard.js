@@ -9,6 +9,8 @@ export default function Dashboard() {
         <>
         <div>
             <Sidebar/>
+        </div>
+        <div>
             <Messages />
         </div>
         </>

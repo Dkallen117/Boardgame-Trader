@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,24 +39,40 @@ function a11yProps(index) {
   };
 }
 
-export default function Sidebar({email}) {
+const useStyles = makeStyles({
+    root: {
+      background: 'white',
+      border: 0,
+      borderRadius: 3,
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      color: 'black',
+      width: '350px',
+      height: '100%',
+      margin: '15px -30px'
+    },
+  });
+  
+
+export default function Sidebar() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const classes = useStyles();
+
   return (
-    <Box sx={{ width: '250px' }}>
+    <Box className={classes.root}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} textColor="secondary"
         indicatorColor="secondary" aria-label="basic tabs example">
-          <Tab label="Contacts" {...a11yProps(0)} />
+          <Tab label="Saved Sellers" {...a11yProps(0)} />
           <Tab label="Messages" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        These are the people you have messaged or are currently messaging.
+        These are the people you have saved for quick messaging.
       </TabPanel>
       <TabPanel value={value} index={1}>
         These are your actual messages with said person.
