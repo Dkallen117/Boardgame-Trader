@@ -36,7 +36,7 @@ const EditListing = () => {
     }
   });
 
-  const [editListing, { error, data }] = useMutation(EDIT_LISTING);
+  const [editListing] = useMutation(EDIT_LISTING);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -77,7 +77,7 @@ const EditListing = () => {
         return false
       }
 
-      const response = await editListing({
+      await editListing({
         variables: { listingId, listingInput: formState },
       });
       window.location.assign(`/listing/${listingId}`)

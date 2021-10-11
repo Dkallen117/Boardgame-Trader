@@ -16,7 +16,7 @@ const ListingForm = () => {
     genre: '',
     img: '',
   });
-  const [addUser, { error, data }] = useMutation(ADD_LISTING);
+  const [addUser] = useMutation(ADD_LISTING);
 
   // update state based on form input changes
   const handleChange = (event) => {
