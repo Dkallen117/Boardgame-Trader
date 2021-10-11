@@ -16,7 +16,6 @@ import Auth from '../utils/auth';
 
 const Hello = () => {
   const { data, loading } = useQuery(QUERY_ME);
-  console.log('I am the data', data);
   return (
     <div>
       { loading ? (
