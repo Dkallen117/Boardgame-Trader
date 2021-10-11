@@ -42,7 +42,6 @@ const ListingForm = () => {
         });
         break;
     }
-    console.log(formState)
   };
 
   // submit form
