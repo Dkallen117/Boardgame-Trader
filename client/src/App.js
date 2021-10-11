@@ -19,7 +19,7 @@ import EditListing from './components/EditListing'
 import Hello from './pages/Hello';
 import OrderList from './pages/OrderList';
 import Setting from './pages/Setting';
-import Purchased from './pages/Purchased';
+import Favorites from './pages/Favorites';
 import Messenger from './pages/Messenger';
 import Listing from './pages/Listing';
 
@@ -72,8 +72,8 @@ function App() {
             <Route exact path="/profile">
               <Hello />
             </Route>
-            <Route exact path="/purchased">
-              <Purchased/>
+            <Route exact path="/favorites">
+              <Favorites/>
             </Route>
             <Route exact path="/profiles/:profileId">
               <Profile />

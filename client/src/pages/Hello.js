@@ -71,8 +71,8 @@ const Hello = () => {
               Message
             </a>
             <br />
-            <a href="/purchased" onClick={() => this.toggModal("Whatever")}>
-              Purchased
+            <a href="/favorites" onClick={() => this.toggModal("Whatever")}>
+              Saved Listings
             </a>
             <br />
             <a href="/setting" onClick={() => this.toggModal("Whatever")}>
