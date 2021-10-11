@@ -214,15 +214,6 @@ export default function Header() {
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 0 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={0} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
