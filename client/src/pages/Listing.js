@@ -12,8 +12,13 @@ import { Local } from '../utils/local';
 
 const Listing = () => {
     const { listingId } = useParams();
-    const userData = Auth.getProfile();
-    let favorited = Local.getFavorites().includes(listingId) || false
+    const token = Auth.getToken();
+    let userData;
+    let favorited = false;
+    if(token) {
+        userData = Auth.getProfile();
+        favorited = Local.getFavorites().includes(listingId);
+    }
 
     const [ dataState, setDataState ] = useState({
         title: '',
@@ -51,12 +56,17 @@ const Listing = () => {
 
     const handleSaveFavorite = async () => {
         try {
-            await saveFavorite();
-            Local.addFavorite(listingId);
-            setDataState({
-                ...dataState,
-                favorited: true,
-            });
+            if(userData) {
+                await saveFavorite();
+                Local.addFavorite(listingId);
+                setDataState({
+                    ...dataState,
+                    favorited: true,
+                });
+                return;
+            }   
+            alert('Log in to interact.');
+            return;
         } catch (e) {
             console.log(e)
         }
@@ -88,7 +98,7 @@ const Listing = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <Grid container spacing={1}>
-                                { dataState.seller.username === userData.data.username ? (
+                                { dataState.seller.username === userData?.data?.username ? (
                                     <Grid item xs={12}>
                                         <Button
                                             variant='contained' 
