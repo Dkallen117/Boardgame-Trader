@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
+import Auth from '../utils/auth';
 
 const Hello = () => {
   const { data, loading } = useQuery(QUERY_ME);
@@ -64,15 +65,15 @@ const Hello = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             <a href="/OrderList" onClick={() => this.toggModal("Whatever")}>
-              Order / Listing
+              My Listings
             </a>
             <br />
-            <a href="/message" onClick={() => this.toggModal("Whatever")}>
+            {/* <a href="/message" onClick={() => this.toggModal("Whatever")}>
               Message
             </a>
-            <br />
-            <a href="/purchased" onClick={() => this.toggModal("Whatever")}>
-              Purchased
+            <br /> */}
+            <a href="/favorites" onClick={() => this.toggModal("Whatever")}>
+              Saved Listings
             </a>
             <br />
             <a href="/setting" onClick={() => this.toggModal("Whatever")}>
@@ -80,7 +81,7 @@ const Hello = () => {
             </a>
             <hr style={{ marginTop: "20px" }} />
             <CardActions>
-              <Button size="small">Log Out</Button>
+              <Button size="small" onClick={Auth.logout}>Log Out</Button>
             </CardActions>
           </Card>
         </Grid>
