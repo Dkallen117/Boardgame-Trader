@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Messages from './Messages';
 
