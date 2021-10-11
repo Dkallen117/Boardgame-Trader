@@ -42,10 +42,10 @@ const Listing = () => {
         }
     });
 
-    const [saveFavorite, favMutation] = useMutation(ADD_FAVORITE, {
+    const [saveFavorite] = useMutation(ADD_FAVORITE, {
         variables: { listingId }
     });
-    const [deleteListing, deleteMutation] = useMutation(REMOVE_LISTING, {
+    const [deleteListing] = useMutation(REMOVE_LISTING, {
         variables: { listingId }
     });
 
