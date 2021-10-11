@@ -13,8 +13,6 @@ import {
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 
-const userName = "Subash Sunuwar";
-
 const Hello = () => {
   const { data, loading } = useQuery(QUERY_ME);
   console.log('I am the data', data);

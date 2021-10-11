@@ -87,6 +87,10 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleMoveToNew = () => {
+    window.location.assign('/new');
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -107,7 +111,7 @@ export default function Header() {
       <MenuItem onClick={handleMenuClose} 
           component={Link} 
           to="/profile" >Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMoveToNew}>Create New Listing</MenuItem>
       <MenuItem onClick={Auth.logout}>Logout</MenuItem>
     </Menu>
   );
@@ -183,6 +187,7 @@ export default function Header() {
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
+            onClick={() => window.location.assign('/')}
           >
             Board Games Trader
           </Typography>
