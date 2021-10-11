@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 const Home = () => {
 const { data, loading } = useQuery(QUERY_ALL_LISTINGS);
 const listings = data?.listings || [];
-console.log(data?.listings.id);
+
   return( 
     <main  > 
       <div className="flex-row justify-center">
