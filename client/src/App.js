@@ -16,7 +16,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ListingForm from './components/ListingForm'
 import EditListing from './components/EditListing'
-import Hello from './pages/Hello';
+import UserProfile from './pages/UserProfile';
 import OrderList from './pages/OrderList';
 import Setting from './pages/Setting';
 import Purchased from './pages/Purchased';
@@ -70,7 +70,7 @@ function App() {
               <Messenger />
             </Route>
             <Route exact path="/profile">
-              <Hello />
+              <UserProfile />
             </Route>
             <Route exact path="/purchased">
               <Purchased/>

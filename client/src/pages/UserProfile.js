@@ -16,6 +16,17 @@ import {
 const userName = "Subash Sunuwar";
 
 const Hello = () => {
+
+  // const [ setOpen, setClose ] = React.useState(false);
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = (value) => {
+  //   setClose(false);
+  // };
+
   // const data = useQuery(QUERY_ME);
   // console.log(data);
   return (
@@ -138,6 +149,7 @@ const Hello = () => {
                         Email: user-email@gmail.com
                       </label>
                       <CardActions style={{ marginTop: "29px" }}>
+                        {/* <Button size="small" onClick={handleClickOpen}>Change Password</Button> */}
                         <Button size="small">Change Password</Button>
                       </CardActions>
                     </Card>

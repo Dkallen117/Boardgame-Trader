@@ -1,5 +1,5 @@
 import React from 'react';
-import listingSeeds from '../../../server/seeders/listingSeeds';
+// import listingSeeds from '../../../server/seeders/listingSeeds';
 
 const ProfileImage = () => {
     return (
