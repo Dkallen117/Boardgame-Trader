@@ -1,8 +1,11 @@
-import React from 'react'
-import Dashboard from './Dashboard'
+import React from 'react';
+import Dashboard from './Dashboard';
 
 export default function Messages() {
     return (
-        <Dashboard />
+        <>
+            <Dashboard />
+        </>
+        
     )
 }

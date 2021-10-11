@@ -87,6 +87,10 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleMoveToNew = () => {
+    window.location.assign('/new');
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -107,6 +111,9 @@ export default function Header() {
       <MenuItem onClick={handleMenuClose} 
           component={Link} 
           to="/profile" >Profile</MenuItem>
+
+      <MenuItem onClick={handleMoveToNew}>Create New Listing</MenuItem>
+
       <MenuItem onClick={Auth.logout}>Logout</MenuItem>
     </Menu>
   );
@@ -173,6 +180,7 @@ export default function Header() {
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
+            onClick={() => window.location.assign('/')}
           >
             Board Games Trader
           </Typography>
@@ -195,15 +203,6 @@ export default function Header() {
             <IconButton component={Link} to="/messenger" size="large" aria-label="messages" color="inherit">
               <Badge badgeContent={0} color="error">
                 <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 0 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={0} color="error">
-                <NotificationsIcon />
               </Badge>
             </IconButton>
             <IconButton

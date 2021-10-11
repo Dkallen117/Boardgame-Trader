@@ -14,7 +14,6 @@ const Listing = () => {
     const { listingId } = useParams();
     const userData = Auth.getProfile();
     let favorited = Local.getFavorites().includes(listingId) || false
-    console.log('favorited', favorited)
 
     const [ dataState, setDataState ] = useState({
         title: '',
@@ -27,7 +26,6 @@ const Listing = () => {
         favorited: favorited,
     });
 
-    
     const { data, loading } = useQuery(QUERY_SINGLE_LISTING, {
         variables: { listingId },
         onCompleted: () => {
@@ -76,7 +74,6 @@ const Listing = () => {
         }
     }
     
-    console.log(data?.listing.seller.username, userData?.data.username)
     return(
         <React.Fragment>
             { loading ? (
@@ -133,6 +130,9 @@ const Listing = () => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     Seller: {dataState.seller.username}
+                                </Grid>
+                                <Grid item xs={6}>
+                                    Contact: {dataState.seller.email}
                                 </Grid>
                             </Grid>
                         </Grid>
