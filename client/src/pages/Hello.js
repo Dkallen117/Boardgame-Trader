@@ -10,17 +10,20 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-// import { useQuery } from "@apollo/client";
-// import { QUERY_ME } from "../utils/queries";
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
 
 const userName = "Subash Sunuwar";
 
 const Hello = () => {
-  // const data = useQuery(QUERY_ME);
-  // console.log(data);
+  const { data, loading } = useQuery(QUERY_ME);
+  console.log('I am the data', data);
   return (
     <div>
-      <Grid container spacing={3} style={{ marginTop: "9px" }}>
+      { loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <Grid container spacing={3} style={{ marginTop: "9px" }}>
         <Grid xs={4}>
           <Paper
             sx={{
@@ -35,13 +38,13 @@ const Hello = () => {
           >
             <Grid container wrap="nowrap" spacing={0}>
               <Grid item>
-                <Avatar>{userName.charAt(0)}</Avatar>
+                <Avatar>{data?.me?.username[0]}</Avatar>
               </Grid>
               <Grid item>
                 <Typography
                   style={{ paddingLeft: "0.5625rem", marginTop: "0.4375rem" }}
                 >
-                  {userName}
+                  {data?.me?.username}
                 </Typography>
               </Grid>
             </Grid>
@@ -102,7 +105,7 @@ const Hello = () => {
                 color="text.secondary"
                 gutterBottom
               >
-                {userName}'s Profile
+                {data?.me?.username}'s Profile
                 <hr style={{ marginTop: "20px" }} />
                 <Grid container>
                   <Grid xs={7} spacing={2}>
@@ -114,8 +117,7 @@ const Hello = () => {
                           alignItems: "center",
                         }}
                       >
-                        First Name: {userName.substr(0, 6)}
-                        {/* First Name: {data.me.username.substr(0, 6)} */}
+                        User Name: {data?.me?.username}
                       </label>
                       <br />
                       <label
@@ -125,17 +127,7 @@ const Hello = () => {
                           alignItems: "center",
                         }}
                       >
-                        Last Name: {userName.substr(7, 7)}
-                      </label>
-                      <br />
-                      <label
-                        style={{
-                          color: "#C9D1D7",
-                          paddingLeft: "9px",
-                          alignItems: "center",
-                        }}
-                      >
-                        Email: user-email@gmail.com
+                        Email: {data?.me?.email}
                       </label>
                       <CardActions style={{ marginTop: "29px" }}>
                         <Button size="small">Change Password</Button>
@@ -161,6 +153,8 @@ const Hello = () => {
           </Card>
         </Grid>
       </Grid>
+      )}
+      
     </div>
   );
 };
