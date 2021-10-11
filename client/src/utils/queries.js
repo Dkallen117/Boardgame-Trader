@@ -45,6 +45,7 @@ export const QUERY_SINGLE_LISTING = gql`
       genre
       seller {
         username
+        email
       }
       img
     }
