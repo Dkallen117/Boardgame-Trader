@@ -89,7 +89,7 @@ const GameList = ({listings})  =>  {
           Genre: {listing.genre}
           </Typography>
           <Typography>
-            Seller: {listing.seller.username}
+            Seller: {listing?.seller?.username}
           </Typography>
         </CardContent>
       </Collapse>
