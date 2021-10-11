@@ -1,38 +1,37 @@
-import * as React from 'react';
+import React from 'react';
+
 import { useQuery } from '@apollo/client';
 
 import GameList from '../components/GameList';
 
- import listings from './listingSeeds.json'
-
 import { QUERY_ALL_LISTINGS } from '../utils/queries';
 
-// const { loading, data } = useQuery(QUERY_ALL_LISTINGS);
-// const listings = data?.listings || [];
 
-class Home extends React.Component  {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listings
-    };
-  }
- 
-  render() {
-    return(  
-           this.state.listings.map(listings => {
-           return( 
-           <main> <div className="col-12 col-md-10 my-3">
-           <GameList
-             title = {listings.title}
-             description = {listings.description}
-             price = {listings.price}
-             quantity = {listings.quantity}
-             genre = {listings.genre}
-           />
-          </div>          
-          </main>);
-        })
-        )}
-      }
+
+const Home = () => {
+
+
+const { data, loading } = useQuery(QUERY_ALL_LISTINGS);
+const listings = data?.listings || [];
+console.log(useQuery(QUERY_ALL_LISTINGS))
+  return( 
+  
+    <main> 
+      <div>
+       {loading ? (
+            <h1>Loading...</h1>
+          ) : (
+            <GameList
+              
+            listings = {listings}
+            />
+            )}
+            </div>  
+         
+  </main>
+ );
+      
+        
+}
+
 export default Home;
