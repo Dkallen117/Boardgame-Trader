@@ -16,7 +16,7 @@ export const QUERY_PROFILES = gql`
 `;
 
 export const QUERY_ALL_LISTINGS = gql`
-  query {
+  query listings {
   	listings {
       _id
       title

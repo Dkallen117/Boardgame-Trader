@@ -16,8 +16,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
+const ExpandMore = styled((listing) => {
+  const { expand, ...other } = listing;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
 
 
 
-export default function GameList(props) {
+const GameList = ({listings}) => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -37,6 +37,9 @@ export default function GameList(props) {
   };
   
   return(
+    <div className="col-12 col-md-10 my-3">
+    {listings &&
+      listings.map((listing) => (
   <Card>
       <CardHeader
         avatar={
@@ -49,12 +52,12 @@ export default function GameList(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.title}
+        title={listing.title}
         subheader="September 14, 2016"
       ></CardHeader>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {props.description}
+          {listing.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -77,13 +80,13 @@ export default function GameList(props) {
         <CardContent>
           <Typography paragraph>Listing Details:</Typography>
           <Typography >
-           {props.price}
+           {listing.price}
           </Typography>
           <Typography >
-          {props.quantity}
+          {listing.quantity}
           </Typography>
           <Typography >
-          {props.genre}
+          {listing.genre}
           </Typography>
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then serve.
@@ -91,4 +94,9 @@ export default function GameList(props) {
         </CardContent>
       </Collapse>
     </Card>
+    
+    ))}
+    </div>
   )};       
+
+  export default GameList;
