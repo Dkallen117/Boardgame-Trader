@@ -20,7 +20,6 @@ const EditListing = () => {
   });
 
   const { listingId } = useParams();
-  console.log(listingId)
   
   const query = useQuery(QUERY_SINGLE_LISTING, {
     variables: { listingId: listingId },
@@ -62,13 +61,11 @@ const EditListing = () => {
         });
         break;
     }
-    console.log(formState)
   };
 
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
   
     try {
       const userData = await Auth.getProfile();
