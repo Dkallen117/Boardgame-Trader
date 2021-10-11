@@ -14,6 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useHistory } from 'react-router-dom';
 
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -38,7 +39,7 @@ const GameList = ({listings})  =>  {
     <div className="col-12 col-md-10 my-3">
     {listings &&
       listings.map((listing, i) => (
-  <Card key={listing._id} sx={{ my: 5 }}>
+  <Card key={listing._id} sx={{ my: 5, border: 3 }}>
       <CardHeader 
         avatar={
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
@@ -48,6 +49,7 @@ const GameList = ({listings})  =>  {
         title={listing.title} 
         component='button'
         onClick={()=> history.push(`/listing/${listing._id}`)}
+        sx={{my: 2, mx: "auto" }}
       > 
       </CardHeader> 
       <CardMedia
