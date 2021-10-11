@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -16,10 +16,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-import { Link } from 'react-router-dom';
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
+const ExpandMore = styled((listing) => {
+  const { expand, ...other } = listing;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -31,17 +29,18 @@ const ExpandMore = styled((props) => {
 
 
 
-const List = ({ listings, title }) => {
+const GameList = ({listings}) => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  <React.Fragment>     
-          {listings &&
-            listings.map((listing) => (
-              <Card sx={{ maxWidth: 345 }}>
+  
+  return(
+    <div className="col-12 col-md-10 my-3">
+    {listings &&
+      listings.map((listing) => (
+  <Card>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -53,7 +52,7 @@ const List = ({ listings, title }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
+        title={listing.title}
         subheader="September 14, 2016"
       ></CardHeader>
       <CardContent>
@@ -95,16 +94,9 @@ const List = ({ listings, title }) => {
         </CardContent>
       </Collapse>
     </Card>
-  ))};       
-</React.Fragment>
-  };
-export default function GameList(){
+    
+    ))}
+    </div>
+  )};       
 
-return(
-
-<Box>{List}</Box>
-);
-
-
-
-};
+  export default GameList;

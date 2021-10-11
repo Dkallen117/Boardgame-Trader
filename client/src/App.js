@@ -20,8 +20,8 @@ import Hello from './pages/Hello';
 import OrderList from './pages/OrderList';
 import Setting from './pages/Setting';
 import Purchased from './pages/Purchased';
-import Message from './pages/Message';
-import Messenger from './components/Messenger';
+import Messenger from './pages/Messenger';
+import Listing from './pages/Listing';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -66,8 +66,8 @@ function App() {
             <Route exact path="/Setting">
               <Setting />
             </Route>
-            <Route exact path="/message">
-              <Message />
+            <Route exact path="/messenger">
+              <Messenger />
             </Route>
             <Route exact path="/profile">
               <Hello />
@@ -81,11 +81,11 @@ function App() {
             <Route exact path="/new">
               <ListingForm />
             </Route>
+            <Route exact path="/listing/:listingId">
+              <Listing />
+            </Route>
             <Route exact path="/edit/:listingId">
               <EditListing />
-            </Route>
-            <Route exact path="/message">
-              <Messenger />
             </Route>
           </div>
           <Footer />

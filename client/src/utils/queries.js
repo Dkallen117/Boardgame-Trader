@@ -3,7 +3,6 @@ import { gql } from '@apollo/client';
 export const QUERY_PROFILES = gql`
   query allProfiles {
     profiles {
-      _id
       username
       listings {
         title
@@ -17,7 +16,7 @@ export const QUERY_PROFILES = gql`
 `;
 
 export const QUERY_ALL_LISTINGS = gql`
-  query {
+  query listings {
   	listings {
       _id
       title
@@ -27,9 +26,7 @@ export const QUERY_ALL_LISTINGS = gql`
       available
       genre
       seller {
-        _id
         username
-        email
       }
       img
     }
@@ -47,7 +44,6 @@ export const QUERY_SINGLE_LISTING = gql`
       available
       genre
       seller {
-        _id
         username
       }
       img

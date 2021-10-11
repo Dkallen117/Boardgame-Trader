@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import {Box, TextField, Button, Grid, MenuItem, InputAdornment} from '@mui/material';
 
@@ -49,7 +48,6 @@ const ListingForm = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     try {
       const userData = await Auth.getProfile();
@@ -61,6 +59,7 @@ const ListingForm = () => {
       const response = await addUser({
         variables: { listingInput: formState },
       });
+      window.location.replace(`/listing/${response.data.addListing._id}`);
     } catch (e) {
       console.error(e);
     }
@@ -164,7 +163,7 @@ const ListingForm = () => {
       <Grid item>
         <Button  type="submit"
          variant="contained"
-        >Submit</Button>
+        >Create</Button>
       </Grid>
 
       </Grid>

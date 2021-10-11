@@ -24,12 +24,15 @@ class AuthService {
   }
 
   login(idToken) {
+    const {data} = decode(idToken);
+    localStorage.setItem('favorites', JSON.stringify(data.favorites));
     localStorage.setItem('id_token', idToken);
     window.location.assign('/profile');
   }
 
   logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('favorites');
     window.location.reload();
   }
 }
