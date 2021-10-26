@@ -5,7 +5,7 @@ const Footer = () => {
   const location = useLocation();
   const history = useHistory();
   return (
-    <footer className="w-100 mt-auto text-dark p-4">
+    <footer className="w-100 mt-auto text-dark p-4" style={{ backgroundColor: '#1565c0' }}>
       <div className="container text-center mb-5">
         {location.pathname !== '/' && (
           <button
@@ -15,7 +15,7 @@ const Footer = () => {
             &larr; Go Back
           </button>
         )}
-        <h4>&copy; {new Date().getFullYear()} - Board Games Trader</h4>
+        <h4 style={{ color: 'white' }}>&copy; {new Date().getFullYear()} - Board Games Trader</h4>
       </div>
     </footer>
   );
