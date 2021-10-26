@@ -17,7 +17,7 @@ This application will give the user a fake e-commerce storefront to purchase a v
 The following necessary dependencies must be installed to run the application properly: This project can be installed by cloning the repository into your local project folder. Run 'npm i' in the terminal to install all dependencies. Use 'npm start' to run to app without the server. Run 'npm build' to create a build file. Than run 'npm run develop' to run the application with a mongoDB server.
 
 ## Usage
-To use this application: The project can be found hosted live on Heroku here: .
+To use this application: The project can be found hosted live on Heroku here: [Board Game Trader](https://boardgame-trader.herokuapp.com/).
 
 ## License
 This project is licensed under the MIT License.
