@@ -50,7 +50,7 @@ function App() {
       <Router>
         <div className="flex-column justify-flex-start min-100-vh" style={{ backgroundImage: 'url("https://media.istockphoto.com/vectors/seamless-geometric-style-vector-pattern-design-vector-id1158618406?k=20&m=1158618406&s=612x612&w=0&h=gj225vX8IXjdOwRRa0_CHi1mXxkL3ZSBCQDh4qFgSXI=")'}}>
           <Header />
-          <div className="container">
+          <div className="container" style={{ backgroundColor: 'white', boxShadow: "0px 10px 15px", height: '100%' }}>
             <Route exact path="/">
               <Home />
             </Route>

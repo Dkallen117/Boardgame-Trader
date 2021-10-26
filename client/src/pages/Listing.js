@@ -89,7 +89,7 @@ const Listing = () => {
             { loading ? (
                 <h1>Loading...</h1>
                 ) : (
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} sx={{ padding: '2%' }}>
                         <Grid item xs={12}>
                             <h1>{dataState.title}</h1>
                         </Grid>
