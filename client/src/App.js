@@ -48,7 +48,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
+        <div className="flex-column justify-flex-start min-100-vh" style={{ backgroundImage: 'url("https://media1.thehungryjpeg.com/thumbs2/ori_3447490_689d834f843af087ff39757990e5d5eb8d4b38f2_seamless-pattern-with-chess-pieces.jpg")'}}>
           <Header />
           <div className="container">
             <Route exact path="/">

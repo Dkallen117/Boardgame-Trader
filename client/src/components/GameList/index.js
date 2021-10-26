@@ -36,7 +36,7 @@ const GameList = ({listings})  =>  {
   let history = useHistory();
   
   return(
-    <div className="flex-row justify-space-around">
+    <div className="flex-row justify-space-around" style={{ backgroundColor: "white", boxShadow: "0px 10px 15px" }}>
     {listings &&
       listings.map((listing, i) => (
   <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%" }}>
