@@ -9,16 +9,14 @@ const { data, loading } = useQuery(QUERY_ALL_LISTINGS);
 const listings = data?.listings || [];
 
   return( 
-    <main  > 
-      <div className="flex-row justify-center">
+    <main> 
+      <div>
        {loading ? (
             <h1>Loading...</h1>
           ) : (
-            <Box>
             <GameList
             listings = {listings}
             />
-            </Box>
             )}
             </div>       
   </main>
