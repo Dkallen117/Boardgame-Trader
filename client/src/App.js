@@ -48,7 +48,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-flex-start min-100-vh" style={{ backgroundImage: 'url("https://media1.thehungryjpeg.com/thumbs2/ori_3447490_689d834f843af087ff39757990e5d5eb8d4b38f2_seamless-pattern-with-chess-pieces.jpg")'}}>
+        <div className="flex-column justify-flex-start min-100-vh" style={{ backgroundImage: 'url("https://media.istockphoto.com/vectors/seamless-geometric-style-vector-pattern-design-vector-id1158618406?k=20&m=1158618406&s=612x612&w=0&h=gj225vX8IXjdOwRRa0_CHi1mXxkL3ZSBCQDh4qFgSXI=")'}}>
           <Header />
           <div className="container">
             <Route exact path="/">

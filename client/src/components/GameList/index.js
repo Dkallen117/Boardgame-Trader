@@ -39,7 +39,7 @@ const GameList = ({listings})  =>  {
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white", boxShadow: "0px 10px 15px" }}>
     {listings &&
       listings.map((listing, i) => (
-  <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%" }}>
+  <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
       <CardHeader 
         avatar={
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
