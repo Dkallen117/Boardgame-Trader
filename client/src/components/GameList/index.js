@@ -36,10 +36,10 @@ const GameList = ({listings})  =>  {
   let history = useHistory();
   
   return(
-    <div className="col-12 col-md-10 my-3">
+    <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
     {listings &&
       listings.map((listing, i) => (
-  <Card key={listing._id} sx={{ my: 5, border: 3 }}>
+  <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
       <CardHeader 
         avatar={
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
