@@ -52,6 +52,26 @@ export const QUERY_SINGLE_LISTING = gql`
   }
 `
 
+export const QUERY_BY_CATEGORY = gql`
+  query category($category: String!){
+    category(category:$category) {
+      _id
+      title
+      description
+      quantity
+      price
+      available
+      genre
+      seller {
+        _id
+        username
+        email
+      }
+      img
+    }
+  }
+`
+
 export const QUERY_SINGLE_PROFILE = gql`
   query singleProfile($profileId: ID!) {
     profile(profileId: $profileId) {
