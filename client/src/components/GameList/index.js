@@ -14,6 +14,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useHistory } from 'react-router-dom';
 
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import data from '../../utils/data';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -29,6 +35,19 @@ const ExpandMore = styled((props) => {
 
 const GameList = ({listings})  =>  {
   const [expanded, setExpanded] = React.useState(-1);
+  const [category, setCategory] = React.useState('');
+  const [activeList, setActiveList] = React.useState(listings);
+
+  const handleCategoryChange = (event) => {
+    const newCat = event.target.value
+    setCategory(newCat);
+    if(newCat) {
+      const newList = listings.filter(item => item.genre === event.target.value);
+      setActiveList(newList);
+    } else {
+      setActiveList(listings);
+    }
+  };
   
   const handleExpandClick = (i) => {
     setExpanded(expanded === i ? -1 : i);
@@ -36,10 +55,27 @@ const GameList = ({listings})  =>  {
   let history = useHistory();
   
   return(
+    <>
+
+    <FormControl fullWidth>
+      <InputLabel>Category</InputLabel>
+      <Select
+        value={category}
+        label="Category"
+        onChange={handleCategoryChange}
+      >
+        <MenuItem value={''}>None</MenuItem>
+        {data.genres.map(genre => (
+          <MenuItem value={genre}>{genre}</MenuItem>
+        ))}
+
+      </Select>
+    </FormControl>
+
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
     {listings &&
-      listings.map((listing, i) => (
-  <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
+      activeList.map((listing, i) => (
+    <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
       <CardHeader 
         avatar={
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
@@ -96,6 +132,7 @@ const GameList = ({listings})  =>  {
     </Card> 
     ))}
     </div>
+    </>
   )};       
 
   export default GameList;
