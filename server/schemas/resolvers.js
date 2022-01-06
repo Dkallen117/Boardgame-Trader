@@ -23,6 +23,11 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    category: async (parent, { category }) => {
+      return Listing.find({
+        genre: category,
+      }).populate('seller');
+    }
   },
 
   Mutation: {
