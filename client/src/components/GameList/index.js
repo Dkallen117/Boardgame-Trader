@@ -18,6 +18,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import data from '../../utils/data';
 
 
 const ExpandMore = styled((props) => {
@@ -58,8 +59,10 @@ const GameList = ({listings})  =>  {
         label="Category"
         onChange={handleCategoryChange}
       >
-        <MenuItem value={"Classics"}>Classics</MenuItem>
-        <MenuItem value={"Card Game"}>Card Game</MenuItem>
+        {data.genres.map(genre => (
+          <MenuItem value={genre}>{genre}</MenuItem>
+        ))}
+
       </Select>
     </FormControl>
 
