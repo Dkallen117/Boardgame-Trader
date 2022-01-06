@@ -39,9 +39,14 @@ const GameList = ({listings})  =>  {
   const [activeList, setActiveList] = React.useState(listings);
 
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-    const newList = listings.filter(item => item.genre === event.target.value);
-    setActiveList(newList);
+    const newCat = event.target.value
+    setCategory(newCat);
+    if(newCat) {
+      const newList = listings.filter(item => item.genre === event.target.value);
+      setActiveList(newList);
+    } else {
+      setActiveList(listings);
+    }
   };
   
   const handleExpandClick = (i) => {
@@ -59,6 +64,7 @@ const GameList = ({listings})  =>  {
         label="Category"
         onChange={handleCategoryChange}
       >
+        <MenuItem value={''}>None</MenuItem>
         {data.genres.map(genre => (
           <MenuItem value={genre}>{genre}</MenuItem>
         ))}
