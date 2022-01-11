@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -13,6 +13,12 @@ import { blue } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useHistory } from 'react-router-dom';
+import { ADD_FAVORITE } from '../../utils/mutations';
+import { useMutation} from '@apollo/client';
+import { Local } from '../../utils/local';
+import Auth from '../../utils/auth';
+
+
 
 
 const ExpandMore = styled((props) => {
@@ -34,8 +40,25 @@ const GameList = ({listings})  =>  {
     setExpanded(expanded === i ? -1 : i);
   };
   let history = useHistory();
+ 
+
+  const [favorite, setFavorite] = useState([]);
+
+
+  
+  
+
+  const addToFavorite = _id => {
+    if (!favorite.includes(_id)) setFavorite(favorite.concat(_id));
+    console.log(_id);
+  };
+
+
   
   return(
+
+    <React.Fragment>
+
     <div className="col-12 col-md-10 my-3">
     {listings &&
       listings.map((listing, i) => (
@@ -64,7 +87,9 @@ const GameList = ({listings})  =>  {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites"
+        onClick={()=>addToFavorite(listing._id)}
+       >
           <FavoriteIcon 
            />
         </IconButton>
@@ -96,6 +121,9 @@ const GameList = ({listings})  =>  {
     </Card> 
     ))}
     </div>
+         
+        
+    </React.Fragment>
   )};       
 
   export default GameList;
