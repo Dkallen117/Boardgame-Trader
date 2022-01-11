@@ -13,10 +13,6 @@ import { blue } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useHistory } from 'react-router-dom';
-import { ADD_FAVORITE } from '../../utils/mutations';
-import { useMutation} from '@apollo/client';
-import { Local } from '../../utils/local';
-import Auth from '../../utils/auth';
 
 
 
@@ -41,6 +37,12 @@ const ExpandMore = styled((props) => {
 
 const GameList = ({listings})  =>  {
   const [expanded, setExpanded] = React.useState(-1);
+  const [results, editResults] = React.useState({
+    category: '',
+    sort: '',
+    active: listings,
+    original: listings,
+  })
   const [category, setCategory] = React.useState('');
   const [activeList, setActiveList] = React.useState(listings);
 
@@ -60,12 +62,7 @@ const GameList = ({listings})  =>  {
   };
   let history = useHistory();
  
-
-  const [favorite, setFavorite] = useState([]);
-
-
-  
-  
+  const [favorite, setFavorite] = useState([]);  
 
   const addToFavorite = _id => {
     if (!favorite.includes(_id)) setFavorite(favorite.concat(_id));
@@ -94,7 +91,7 @@ const GameList = ({listings})  =>  {
 
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
     {listings &&
-      activeList.map((listing, i) => (
+      results.active.map((listing, i) => (
     <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
       <CardHeader 
         avatar={
