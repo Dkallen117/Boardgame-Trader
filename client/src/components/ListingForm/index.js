@@ -5,6 +5,8 @@ import {Box, TextField, Button, Grid, MenuItem, InputAdornment} from '@mui/mater
 import { useMutation } from '@apollo/client';
 import { ADD_LISTING } from '../../utils/mutations';
 
+import data from '../../utils/data';
+
 import Auth from '../../utils/auth';
 
 const ListingForm = () => {
@@ -152,10 +154,10 @@ const ListingForm = () => {
           defaultValue={formState.genre}
           onChange={handleChange}
         >
-          <MenuItem value='Classic'>Classic</MenuItem>
-          <MenuItem value='Card Game'>Card Game</MenuItem>
-          <MenuItem value='Strategy'>Strategy</MenuItem>
-          <MenuItem value='Word Game'>Word Game</MenuItem>
+          {data.genres.map(genre => (
+            <MenuItem value={genre}>{genre}</MenuItem>
+          ))}
+          
         </TextField>
       </Grid>
 

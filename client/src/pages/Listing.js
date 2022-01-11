@@ -89,7 +89,7 @@ const Listing = () => {
             { loading ? (
                 <h1>Loading...</h1>
                 ) : (
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} sx={{ padding: '2%' }}>
                         <Grid item xs={12}>
                             <h1>{dataState.title}</h1>
                         </Grid>
@@ -126,23 +126,23 @@ const Listing = () => {
                                 )}
                                 <Grid item xs={12}>
                                     <p>
-                                        {dataState.description}
+                                        {dataState?.description}
                                     </p>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    Price: $ {dataState.price}
+                                    Price: $ {dataState?.price}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    Quantity: {dataState.quantity}
+                                    Quantity: {dataState?.quantity}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    Genre: {dataState.genre}
+                                    Genre: {dataState?.genre}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    Seller: {dataState.seller.username}
+                                    Seller: {dataState?.seller?.username}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    Contact: {dataState.seller.email}
+                                    Contact: {dataState?.seller?.email}
                                 </Grid>
                             </Grid>
                         </Grid>
