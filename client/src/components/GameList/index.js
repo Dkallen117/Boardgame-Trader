@@ -14,8 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useHistory } from 'react-router-dom';
 
-
-
+import { Grid } from '@mui/material';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
@@ -41,20 +40,24 @@ const GameList = ({listings})  =>  {
     category: '',
     sort: '',
     active: listings,
+    last: [],
     original: listings,
   })
-  const [category, setCategory] = React.useState('');
-  const [activeList, setActiveList] = React.useState(listings);
 
-  const handleCategoryChange = (event) => {
-    const newCat = event.target.value
-    setCategory(newCat);
-    if(newCat) {
-      const newList = listings.filter(item => item.genre === event.target.value);
-      setActiveList(newList);
-    } else {
-      setActiveList(listings);
-    }
+  const handleListChange = (event) => {
+    console.log('Clicked!');
+    // const name = event.target.name;
+    // const value = event.target.value;
+    // let category = results.category;
+    // let list = results.active;
+
+    // if(name === 'category') {
+    //   list = listings.filter(item => item.genre === category);
+    // }
+    
+    // if(name === 'sort') {
+      
+    // }
   };
   
   const handleExpandClick = (i) => {
@@ -74,20 +77,42 @@ const GameList = ({listings})  =>  {
   return(
     <>
 
-    <FormControl fullWidth>
-      <InputLabel>Category</InputLabel>
-      <Select
-        value={category}
-        label="Category"
-        onChange={handleCategoryChange}
-      >
-        <MenuItem value={''}>None</MenuItem>
-        {data.genres.map(genre => (
-          <MenuItem value={genre}>{genre}</MenuItem>
-        ))}
+    <Grid container>
 
-      </Select>
-    </FormControl>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel>Category</InputLabel>
+          <Select
+            value={results.category}
+            name='category'
+            label="Category"
+            onChange={handleListChange}
+            >
+            <MenuItem value={''}>None</MenuItem>
+            {data.genres.map((genre, i) => (
+              <MenuItem value={genre} key={i}>{genre}</MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+      </Grid>
+    
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel>Sort</InputLabel>
+          <Select
+            value={results.sort}
+            label="Sort"
+            name='sort'
+            onChange={handleListChange}
+            >
+            <MenuItem value={''}>None</MenuItem>
+            <MenuItem value={'AA'}>Alphabetical Asc.</MenuItem>
+            <MenuItem value={'AD'}>Alphabetical Desc.</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+
+    </Grid>
 
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
     {listings &&
