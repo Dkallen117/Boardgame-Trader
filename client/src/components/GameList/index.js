@@ -42,22 +42,68 @@ const GameList = ({listings})  =>  {
     active: listings,
     last: [],
     original: listings,
-  })
+  });
+
+  // Define a function that will be use to sort listings alphabetically
+  const alphaSort = (x, y) => {
+    // Set the titles to uppercase for better comparisons
+    let xTitle = x.title.toUpperCase();
+    let yTitle = y.title.toUpperCase();
+    if(xTitle < yTitle) {return -1;}
+    if(xTitle > yTitle) {return 1;}
+    return 0;
+  }
+
+  // Define a compare function that will sort listings by number
+  // const priceSort = (x, y) => {
+  //   // Set the prices to float
+  //   let xPrice = parseFloat(x.price);
+  //   let yPrice = parseFloat(y.price);
+  //   // Compare
+  //   if(xPrice < yPrice) {return -1;}
+  //   if(xPrice > yPrice) {return 1;}
+  //   return 0;
+  // }
 
   const handleListChange = (event) => {
-    console.log('Clicked!');
-    // const name = event.target.name;
-    // const value = event.target.value;
-    // let category = results.category;
-    // let list = results.active;
+    const name = event.target.name;
+    const value = event.target.value;
+    let category = results.category;
+    let sort = results.sort;
+    let list = [...results.active];
 
-    // if(name === 'category') {
-    //   list = listings.filter(item => item.genre === category);
-    // }
-    
-    // if(name === 'sort') {
-      
-    // }
+    // If the box is the 'category' select
+    if(name === 'category') {
+      // Filter the original
+      list = listings.filter(item => item.genre === category);
+    }
+
+    // If the box is the 'sort' select
+    if(name === 'sort') {
+      // Set the sort to the select box value
+      sort = value;
+      // Determine how to sort with a switch
+      switch(sort) {
+        case 'AA':
+          list = list.sort(alphaSort);
+          break;
+        case 'AD':
+          list = list.sort(alphaSort).reverse();
+          break;
+        default:
+          // Reset order if 'None' is selected
+          list = [...listings]
+          break;
+      }
+    }
+
+    editResults({
+      ...results,
+      category: category,
+      sort: sort,
+      active: [...list],
+      last: [...results.active]
+    });
   };
   
   const handleExpandClick = (i) => {
@@ -71,8 +117,6 @@ const GameList = ({listings})  =>  {
     if (!favorite.includes(_id)) setFavorite(favorite.concat(_id));
     console.log(_id);
   };
-
-
   
   return(
     <>
