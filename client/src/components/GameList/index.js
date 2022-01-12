@@ -156,10 +156,10 @@ const GameList = ({listings})  =>  {
             onChange={handleListChange}
             >
             <MenuItem value={''}>None</MenuItem>
-            <MenuItem value={'AA'}>Alphabetical Asc.</MenuItem>
-            <MenuItem value={'AD'}>Alphabetical Desc.</MenuItem>
-            <MenuItem value={'PA'}>Price Asc.</MenuItem>
-            <MenuItem value={'PD'}>Price Desc.</MenuItem>
+            <MenuItem value={'AA'}>Alphabetical: A-Z</MenuItem>
+            <MenuItem value={'AD'}>Alphabetical: Z-A</MenuItem>
+            <MenuItem value={'PA'}>Price: Low to High</MenuItem>
+            <MenuItem value={'PD'}>Price: High to Low</MenuItem>
           </Select>
         </FormControl>
       </Grid>
