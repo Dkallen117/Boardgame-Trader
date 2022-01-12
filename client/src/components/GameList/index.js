@@ -55,15 +55,15 @@ const GameList = ({listings})  =>  {
   }
 
   // Define a compare function that will sort listings by number
-  // const priceSort = (x, y) => {
-  //   // Set the prices to float
-  //   let xPrice = parseFloat(x.price);
-  //   let yPrice = parseFloat(y.price);
-  //   // Compare
-  //   if(xPrice < yPrice) {return -1;}
-  //   if(xPrice > yPrice) {return 1;}
-  //   return 0;
-  // }
+  const priceSort = (x, y) => {
+    // Set the prices to float
+    let xPrice = parseFloat(x.price);
+    let yPrice = parseFloat(y.price);
+    // Compare
+    if(xPrice < yPrice) {return -1;}
+    if(xPrice > yPrice) {return 1;}
+    return 0;
+  }
 
   const handleListChange = (event) => {
     const name = event.target.name;
@@ -89,6 +89,12 @@ const GameList = ({listings})  =>  {
           break;
         case 'AD':
           list = list.sort(alphaSort).reverse();
+          break;
+        case 'PA':
+          list = list.sort(priceSort);
+          break;
+        case 'PD':
+          list = list.sort(priceSort).reverse();
           break;
         default:
           // Reset order if 'None' is selected
@@ -152,6 +158,8 @@ const GameList = ({listings})  =>  {
             <MenuItem value={''}>None</MenuItem>
             <MenuItem value={'AA'}>Alphabetical Asc.</MenuItem>
             <MenuItem value={'AD'}>Alphabetical Desc.</MenuItem>
+            <MenuItem value={'PA'}>Price Asc.</MenuItem>
+            <MenuItem value={'PD'}>Price Desc.</MenuItem>
           </Select>
         </FormControl>
       </Grid>
