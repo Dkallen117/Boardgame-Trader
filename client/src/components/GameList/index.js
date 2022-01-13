@@ -81,9 +81,9 @@ const GameList = ({listings})  =>  {
       category = results.category;
     }
 
-    // If the category exists
+    // If the category is not blank
     if(category) {
-      // Filter the original
+      // Filter the original list received
       list = list.filter(item => item.genre === category);
     }
 
@@ -111,8 +111,7 @@ const GameList = ({listings})  =>  {
         list = list.sort(priceSort).reverse();
         break;
       default:
-        // Reset order if 'None' is selected
-        // list = [...listings]
+        // Don't sort if nothing selected
         break;
     }
 
@@ -134,7 +133,6 @@ const GameList = ({listings})  =>  {
 
   const addToFavorite = _id => {
     if (!favorite.includes(_id)) setFavorite(favorite.concat(_id));
-    console.log(_id);
   };
   
   return(
