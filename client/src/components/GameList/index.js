@@ -138,11 +138,11 @@ const GameList = ({listings})  =>  {
   return(
     <>
 
-    <Grid container>
+    <Grid container spacing={2} sx={{ p: '2%' }}>
 
       <Grid item xs={6}>
         <FormControl fullWidth>
-          <InputLabel>Category</InputLabel>
+          <InputLabel>Genre</InputLabel>
           <Select
             value={results.category}
             name='category'
