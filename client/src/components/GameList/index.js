@@ -39,9 +39,9 @@ const GameList = ({listings})  =>  {
   const [results, editResults] = React.useState({
     category: '',
     sort: '',
-    active: listings,
+    active: [...listings],
     last: [],
-    original: listings,
+    original: [...listings],
   });
 
   // Define a function that will be use to sort listings alphabetically
@@ -66,41 +66,54 @@ const GameList = ({listings})  =>  {
   }
 
   const handleListChange = (event) => {
-    const name = event.target.name;
+    const selectName = event.target.name;
     const value = event.target.value;
-    let category = results.category;
-    let sort = results.sort;
-    let list = [...results.active];
+    let category
+    let sort
+    let list = [...listings];
 
     // If the box is the 'category' select
-    if(name === 'category') {
+    if(selectName === 'category') {
+      // Change the category into the value selected
+      category = value;
+    } else {
+      // Else use the saved value
+      category = results.category;
+    }
+
+    // If the category exists
+    if(category) {
       // Filter the original
-      list = listings.filter(item => item.genre === category);
+      list = list.filter(item => item.genre === category);
     }
 
     // If the box is the 'sort' select
-    if(name === 'sort') {
-      // Set the sort to the select box value
+    if(selectName === 'sort') {
+      // Change the sort to the value selected
       sort = value;
-      // Determine how to sort with a switch
-      switch(sort) {
-        case 'AA':
-          list = list.sort(alphaSort);
-          break;
-        case 'AD':
-          list = list.sort(alphaSort).reverse();
-          break;
-        case 'PA':
-          list = list.sort(priceSort);
-          break;
-        case 'PD':
-          list = list.sort(priceSort).reverse();
-          break;
-        default:
-          // Reset order if 'None' is selected
-          list = [...listings]
-          break;
-      }
+    } else {
+      // Else use the saved value
+      sort = results.sort;
+    }
+
+    // Determine how to sort with a switch
+    switch(sort) {
+      case 'AA':
+        list = list.sort(alphaSort);
+        break;
+      case 'AD':
+        list = list.sort(alphaSort).reverse();
+        break;
+      case 'PA':
+        list = list.sort(priceSort);
+        break;
+      case 'PD':
+        list = list.sort(priceSort).reverse();
+        break;
+      default:
+        // Reset order if 'None' is selected
+        // list = [...listings]
+        break;
     }
 
     editResults({
