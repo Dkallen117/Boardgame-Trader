@@ -13,6 +13,7 @@ import { blue } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useHistory } from 'react-router-dom';
+
 import { ADD_FAVORITE } from '../../utils/mutations';
 import { useMutation} from '@apollo/client';
 import { Local } from '../../utils/local';
@@ -21,11 +22,13 @@ import Auth from '../../utils/auth';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 
+import { Grid } from '@mui/material';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import data from '../../utils/data';
+import sorting from '../../utils/sorting';
 
 
 const ExpandMore = styled((props) => {
@@ -82,18 +85,71 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const GameList = ({listings})  =>  {
   const [expanded, setExpanded] = React.useState(-1);
-  const [category, setCategory] = React.useState('');
-  const [activeList, setActiveList] = React.useState(listings);
+  const [results, editResults] = React.useState({
+    category: '',
+    sort: '',
+    active: [...listings],
+    last: [],
+    original: [...listings],
+  });
 
-  const handleCategoryChange = (event) => {
-    const newCat = event.target.value
-    setCategory(newCat);
-    if(newCat) {
-      const newList = listings.filter(item => item.genre === event.target.value);
-      setActiveList(newList);
+  const handleListChange = (event) => {
+    const selectName = event.target.name;
+    const value = event.target.value;
+    let category
+    let sort
+    let list = [...listings];
+
+    // If the box is the 'category' select
+    if(selectName === 'category') {
+      // Change the category into the value selected
+      category = value;
     } else {
-      setActiveList(listings);
+      // Else use the saved value
+      category = results.category;
     }
+
+    // If the category is not blank
+    if(category) {
+      // Filter the original list received
+      list = list.filter(item => item.genre === category);
+    }
+
+    // If the box is the 'sort' select
+    if(selectName === 'sort') {
+      // Change the sort to the value selected
+      sort = value;
+    } else {
+      // Else use the saved value
+      sort = results.sort;
+    }
+
+    // Determine how to sort with a switch
+    switch(sort) {
+      case 'AA':
+        list = list.sort(sorting.titleSort);
+        break;
+      case 'AD':
+        list = list.sort(sorting.titleSort).reverse();
+        break;
+      case 'PA':
+        list = list.sort(sorting.priceSort);
+        break;
+      case 'PD':
+        list = list.sort(sorting.priceSort).reverse();
+        break;
+      default:
+        // Don't sort if nothing selected
+        break;
+    }
+
+    editResults({
+      ...results,
+      category: category,
+      sort: sort,
+      active: [...list],
+      last: [...results.active]
+    });
   };
   
   const handleExpandClick = (i) => {
@@ -101,17 +157,53 @@ const GameList = ({listings})  =>  {
   };
   let history = useHistory();
  
-
-  const [favorite, setFavorite] = useState([]);
-
-
-  
-  
+  const [favorite, setFavorite] = useState([]);  
 
   const addToFavorite = _id => {
     if (!favorite.includes(_id)) setFavorite(favorite.concat(_id));
-    console.log(_id);
   };
+  
+  return(
+    <>
+
+    <Grid container spacing={2} sx={{ p: '2%' }}>
+
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel>Genre</InputLabel>
+          <Select
+            value={results.category}
+            name='category'
+            label="Category"
+            onChange={handleListChange}
+            >
+            <MenuItem value={''}>None</MenuItem>
+            {data.genres.map((genre, i) => (
+              <MenuItem value={genre} key={i}>{genre}</MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+      </Grid>
+    
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel>Sort</InputLabel>
+          <Select
+            value={results.sort}
+            label="Sort"
+            name='sort'
+            onChange={handleListChange}
+            >
+            <MenuItem value={''}>None</MenuItem>
+            <MenuItem value={'AA'}>Alphabetical: A-Z</MenuItem>
+            <MenuItem value={'AD'}>Alphabetical: Z-A</MenuItem>
+            <MenuItem value={'PA'}>Price: Low to High</MenuItem>
+            <MenuItem value={'PD'}>Price: High to Low</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+
+    </Grid>
 
   const [SearchTerms, setSearchTerms] = useState("");
  
@@ -169,7 +261,7 @@ const GameList = ({listings})  =>  {
 
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
     {listings &&
-      activeList.map((listing, i) => (
+      results.active.map((listing, i) => (
     <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
       <CardHeader 
         avatar={
