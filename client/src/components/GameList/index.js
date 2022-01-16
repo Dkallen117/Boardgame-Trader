@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,6 +13,14 @@ import { blue } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useHistory } from 'react-router-dom';
+
+import { ADD_FAVORITE } from '../../utils/mutations';
+import { useMutation} from '@apollo/client';
+import { Local } from '../../utils/local';
+import Auth from '../../utils/auth';
+
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
 
 import { Grid } from '@mui/material';
 import Select from '@mui/material/Select';
@@ -32,6 +40,46 @@ const ExpandMore = styled((props) => {
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
+}));
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
 }));
 
 
@@ -156,6 +204,60 @@ const GameList = ({listings})  =>  {
       </Grid>
 
     </Grid>
+
+  const [SearchTerms, setSearchTerms] = useState("");
+ 
+
+  const onChangeSearch = (event) => {
+ 
+   const newSearch = event.target.value;
+   
+ 
+   if(newSearch !== '') {
+ 
+     const searchResult = listings.filter((listings) => {
+
+      return listings.title.toLowerCase().startsWith(newSearch.toLowerCase())
+
+     });
+     setActiveList(searchResult);
+    } else {
+      setActiveList(listings);
+    }
+   
+    setSearchTerms(newSearch);
+ 
+  } 
+
+  return(
+    <>
+
+    <Search>
+    <SearchIconWrapper>
+      <SearchIcon />
+    </SearchIconWrapper>
+    <StyledInputBase
+      placeholder="Search by Title"
+     
+      value = {SearchTerms}
+      onChange={onChangeSearch}
+    />
+  </Search>
+
+    <FormControl fullWidth>
+      <InputLabel>Category</InputLabel>
+      <Select
+        value={category}
+        label="Category"
+        onChange={handleCategoryChange}
+      >
+        <MenuItem value={''}>None</MenuItem>
+        {data.genres.map(genre => (
+          <MenuItem value={genre}>{genre}</MenuItem>
+        ))}
+
+      </Select>
+    </FormControl>
 
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
     {listings &&
