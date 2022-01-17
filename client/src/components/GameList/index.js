@@ -92,7 +92,8 @@ const GameList = ({listings})  =>  {
     last: [],
     original: [...listings],
   });
-
+ 
+ 
   const handleListChange = (event) => {
     const selectName = event.target.name;
     const value = event.target.value;
@@ -162,6 +163,31 @@ const GameList = ({listings})  =>  {
   const addToFavorite = _id => {
     if (!favorite.includes(_id)) setFavorite(favorite.concat(_id));
   };
+
+  const [SearchTerms, setSearchTerms] = useState("");
+  const [activeList, setActiveList] = React.useState(listings);
+
+  const onChangeSearch = (event) => {
+
+    const newSearch = event.target.value;
+ 
+ 
+    if(newSearch !== '') {
+ 
+      const searchResult = listings.filter((listings) => {
+ 
+       return listings.title.toLowerCase().startsWith(newSearch.toLowerCase())
+        
+      });
+      setActiveList(searchResult);
+      console.log("change");
+     } else {
+       setActiveList(listings);
+     }
+ 
+     setSearchTerms(newSearch);
+ 
+   } 
   
   return(
     <>
@@ -205,32 +231,6 @@ const GameList = ({listings})  =>  {
 
     </Grid>
 
-  const [SearchTerms, setSearchTerms] = useState("");
- 
-
-  const onChangeSearch = (event) => {
- 
-   const newSearch = event.target.value;
-   
- 
-   if(newSearch !== '') {
- 
-     const searchResult = listings.filter((listings) => {
-
-      return listings.title.toLowerCase().startsWith(newSearch.toLowerCase())
-
-     });
-     setActiveList(searchResult);
-    } else {
-      setActiveList(listings);
-    }
-   
-    setSearchTerms(newSearch);
- 
-  } 
-
-  return(
-    <>
 
     <Search>
     <SearchIconWrapper>
@@ -244,7 +244,7 @@ const GameList = ({listings})  =>  {
     />
   </Search>
 
-    <FormControl fullWidth>
+    {/* <FormControl fullWidth>
       <InputLabel>Category</InputLabel>
       <Select
         value={category}
@@ -257,7 +257,7 @@ const GameList = ({listings})  =>  {
         ))}
 
       </Select>
-    </FormControl>
+    </FormControl> */}
 
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
     {listings &&
