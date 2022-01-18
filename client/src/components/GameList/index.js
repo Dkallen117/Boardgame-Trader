@@ -242,8 +242,8 @@ const GameList = ({listings})  =>  {
     </Grid>
 
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
-      
-      {listings &&
+
+      {results.active.length > 0 ? (
         results.active.map((listing, i) => (
           <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
             <CardHeader 
@@ -306,7 +306,9 @@ const GameList = ({listings})  =>  {
               </CardContent>
             </Collapse>
           </Card> 
-        ))
+        ))) : (
+          <h4>Looks like there isn't anything like that</h4>
+        )
       }
 
     </div>
