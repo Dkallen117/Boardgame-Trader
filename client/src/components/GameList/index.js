@@ -222,7 +222,7 @@ const GameList = ({listings})  =>  {
             onChange={handleListChange}
             >
             {sorting.sortOptions.map((option, i) => (
-              <MenuItem value={option.value}>{option.text}</MenuItem>
+              <MenuItem value={option.value} key={i}>{option.text}</MenuItem>
             ))}
           </Select>
         </FormControl>
