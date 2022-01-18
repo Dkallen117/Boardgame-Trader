@@ -221,11 +221,9 @@ const GameList = ({listings})  =>  {
             name='sort'
             onChange={handleListChange}
             >
-            <MenuItem value={''}>None</MenuItem>
-            <MenuItem value={'AA'}>Alphabetical: A-Z</MenuItem>
-            <MenuItem value={'AD'}>Alphabetical: Z-A</MenuItem>
-            <MenuItem value={'PA'}>Price: Low to High</MenuItem>
-            <MenuItem value={'PD'}>Price: High to Low</MenuItem>
+            {sorting.sortOptions.map((option, i) => (
+              <MenuItem value={option.value}>{option.text}</MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Grid>
