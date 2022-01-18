@@ -131,7 +131,7 @@ const GameList = ({listings})  =>  {
       category = results.category;
     }
 
-    // If the category is not blank
+    // If a category is selected
     if(category) {
       // Filter the original list received
       list = list.filter(item => item.genre === category);
@@ -188,8 +188,21 @@ const GameList = ({listings})  =>  {
   
   return(
     <>
-
     <Grid container spacing={2} sx={{ p: '2%' }}>
+
+      <Grid item xs={12}>
+        <Search fullWidth>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search by Title"
+            name='search'
+            value = {SearchTerms}
+            onChange={handleListChange}
+          />
+        </Search>
+      </Grid>
 
       <Grid item xs={6}>
         <FormControl fullWidth>
@@ -228,95 +241,76 @@ const GameList = ({listings})  =>  {
 
     </Grid>
 
-
-    <Search>
-    <SearchIconWrapper>
-      <SearchIcon />
-    </SearchIconWrapper>
-    <StyledInputBase
-      placeholder="Search by Title"
-      name='search'
-      value = {SearchTerms}
-      onChange={handleListChange}
-    />
-  </Search>
-
-    {/* <FormControl fullWidth>
-      <InputLabel>Category</InputLabel>
-      <Select
-        value={category}
-        label="Category"
-        onChange={handleCategoryChange}
-      >
-        <MenuItem value={''}>None</MenuItem>
-        {data.genres.map(genre => (
-          <MenuItem value={genre}>{genre}</MenuItem>
-        ))}
-
-      </Select>
-    </FormControl> */}
-
     <div className="flex-row justify-space-around" style={{ backgroundColor: "white",  }}>
-    {listings &&
-      results.active.map((listing, i) => (
-    <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
-      <CardHeader 
-        avatar={
-          <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
-            G
-          </Avatar>
-        }
-        title={listing.title} 
-        component='button'
-        onClick={()=> history.push(`/listing/${listing._id}`)}
-        sx={{my: 2, mx: "auto" }}
-      > 
-      </CardHeader> 
-      <CardMedia
-        component="img"
-        height="194"
-        image={listing.img}
-        alt="Game"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary" >
-          {listing.description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites"
-        onClick={()=>addToFavorite(listing._id)}
-       >
-          <FavoriteIcon 
-           />
-        </IconButton>
-        <ExpandMore        
-          onClick={() => handleExpandClick(i)}
-          aria-expanded={expanded === i}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded === i} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Listing Details:</Typography>
-          <Typography  >
-           Price: {listing.price}
-          </Typography>
-          <Typography >
-          Quantity: {listing.quantity}
-          </Typography>
-          <Typography >
-          Genre: {listing.genre}
-          </Typography>
-          <Typography>
-            Seller: {listing?.seller?.username}
-          </Typography>
-        </CardContent>
-      </Collapse>
-    </Card> 
-    ))}
+
+      {results.active.length > 0 ? (
+        results.active.map((listing, i) => (
+          <Card key={listing._id} sx={{ my: 5, border: 3, width: "30%", boxShadow: "0px 10px 20px" }}>
+            <CardHeader 
+              avatar={
+                <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
+                  G
+                </Avatar>
+              }
+              title={listing.title} 
+              component='button'
+              onClick={()=> history.push(`/listing/${listing._id}`)}
+              sx={{my: 2, mx: "auto" }}
+            > 
+            </CardHeader> 
+
+            <CardMedia
+              component="img"
+              height="194"
+              image={listing.img}
+              alt="Game"
+            />
+
+            <CardContent>
+              <Typography variant="body2" color="text.secondary" >
+                {listing.description}
+              </Typography>
+            </CardContent>
+
+            <CardActions disableSpacing>
+              <IconButton aria-label="add to favorites"
+              onClick={()=>addToFavorite(listing._id)}
+             >
+                <FavoriteIcon 
+                 />
+              </IconButton>
+              <ExpandMore        
+                onClick={() => handleExpandClick(i)}
+                aria-expanded={expanded === i}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </CardActions>
+
+            <Collapse in={expanded === i} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Typography paragraph>Listing Details:</Typography>
+                <Typography  >
+                 Price: {listing.price}
+                </Typography>
+                <Typography >
+                Quantity: {listing.quantity}
+                </Typography>
+                <Typography >
+                Genre: {listing.genre}
+                </Typography>
+                <Typography>
+                  Seller: {listing?.seller?.username}
+                </Typography>
+              </CardContent>
+            </Collapse>
+          </Card> 
+        ))) : (
+          <h4>Looks like there isn't anything like that</h4>
+        )
+      }
+
     </div>
     </>
   )};       
