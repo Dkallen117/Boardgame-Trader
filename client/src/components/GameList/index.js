@@ -182,7 +182,7 @@ const GameList = ({listings})  =>  {
     <Grid container spacing={2} sx={{ p: '2%' }}>
 
       <Grid item xs={12}>
-        <Search fullWidth>
+        <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
