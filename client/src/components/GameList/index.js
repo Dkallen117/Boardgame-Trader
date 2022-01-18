@@ -85,9 +85,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const GameList = ({listings})  =>  {
   const [expanded, setExpanded] = React.useState(-1);
+  const [SearchTerms, setSearchTerms] = useState("");
+  const [favorite, setFavorite] = useState([]);
   const [results, editResults] = React.useState({
     category: '',
     sort: '',
+    searchTerm: '',
     active: [...listings],
     last: [],
     original: [...listings],
@@ -97,9 +100,27 @@ const GameList = ({listings})  =>  {
   const handleListChange = (event) => {
     const selectName = event.target.name;
     const value = event.target.value;
+    let search;
     let category
     let sort
     let list = [...listings];
+
+    // If search terms are being entered
+    if(selectName === 'search') {
+      // Set the search var to the entered value
+      search = value;
+    } else {
+      // Else use the saved value
+      search = results.searchTerm;
+    }
+
+    // If search terms exist
+    if(search) {
+      // Filter the list based on the terms
+      list = list.filter(listings =>
+        listings.title.toLowerCase().startsWith(search.toLowerCase())
+      );
+    }
 
     // If the box is the 'category' select
     if(selectName === 'category') {
@@ -148,46 +169,22 @@ const GameList = ({listings})  =>  {
       ...results,
       category: category,
       sort: sort,
+      searchTerm: search,
       active: [...list],
       last: [...results.active]
     });
+    setSearchTerms(search);
   };
   
   const handleExpandClick = (i) => {
     setExpanded(expanded === i ? -1 : i);
   };
+
   let history = useHistory();
- 
-  const [favorite, setFavorite] = useState([]);  
 
   const addToFavorite = _id => {
     if (!favorite.includes(_id)) setFavorite(favorite.concat(_id));
   };
-
-  const [SearchTerms, setSearchTerms] = useState("");
-  const [activeList, setActiveList] = React.useState(listings);
-
-  const onChangeSearch = (event) => {
-
-    const newSearch = event.target.value;
- 
- 
-    if(newSearch !== '') {
- 
-      const searchResult = listings.filter((listings) => {
- 
-       return listings.title.toLowerCase().startsWith(newSearch.toLowerCase())
-        
-      });
-      setActiveList(searchResult);
-      console.log("change");
-     } else {
-       setActiveList(listings);
-     }
- 
-     setSearchTerms(newSearch);
- 
-   } 
   
   return(
     <>
@@ -238,9 +235,9 @@ const GameList = ({listings})  =>  {
     </SearchIconWrapper>
     <StyledInputBase
       placeholder="Search by Title"
-     
+      name='search'
       value = {SearchTerms}
-      onChange={onChangeSearch}
+      onChange={handleListChange}
     />
   </Search>
 
