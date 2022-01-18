@@ -100,18 +100,15 @@ const GameList = ({listings})  =>  {
   const handleListChange = (event) => {
     const selectName = event.target.name;
     const value = event.target.value;
-    let search;
-    let category
-    let sort
+    let search = results.searchTerm;;
+    let category = results.category;
+    let sort = results.sort;
     let list = [...listings];
 
     // If search terms are being entered
     if(selectName === 'search') {
       // Set the search var to the entered value
       search = value;
-    } else {
-      // Else use the saved value
-      search = results.searchTerm;
     }
 
     // If search terms exist
@@ -126,9 +123,6 @@ const GameList = ({listings})  =>  {
     if(selectName === 'category') {
       // Change the category into the value selected
       category = value;
-    } else {
-      // Else use the saved value
-      category = results.category;
     }
 
     // If a category is selected
@@ -141,9 +135,6 @@ const GameList = ({listings})  =>  {
     if(selectName === 'sort') {
       // Change the sort to the value selected
       sort = value;
-    } else {
-      // Else use the saved value
-      sort = results.sort;
     }
 
     // Determine how to sort with a switch
