@@ -191,6 +191,20 @@ const GameList = ({listings})  =>  {
 
     <Grid container spacing={2} sx={{ p: '2%' }}>
 
+      <Grid item xs={12}>
+        <Search fullWidth>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search by Title"
+            name='search'
+            value = {SearchTerms}
+            onChange={handleListChange}
+          />
+        </Search>
+      </Grid>
+
       <Grid item xs={6}>
         <FormControl fullWidth>
           <InputLabel>Genre</InputLabel>
@@ -229,17 +243,7 @@ const GameList = ({listings})  =>  {
     </Grid>
 
 
-    <Search>
-    <SearchIconWrapper>
-      <SearchIcon />
-    </SearchIconWrapper>
-    <StyledInputBase
-      placeholder="Search by Title"
-      name='search'
-      value = {SearchTerms}
-      onChange={handleListChange}
-    />
-  </Search>
+    
 
     {/* <FormControl fullWidth>
       <InputLabel>Category</InputLabel>
