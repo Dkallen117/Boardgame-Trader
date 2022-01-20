@@ -69,7 +69,21 @@ export default function Header() {
     >
       <MenuItem onClick={handleMenuClose} 
           component={Link} 
-          to="/profile" >Profile</MenuItem>
+          to="/profile"
+      > Profile
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose} 
+          component={Link} 
+          to="/OrderList"
+      > My Listings
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose} 
+          component={Link} 
+          to="/favorites"
+      > Saved Items
+      </MenuItem>
 
       <MenuItem onClick={handleMoveToNew}>Create New Listing</MenuItem>
 
