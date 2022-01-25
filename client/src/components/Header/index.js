@@ -146,6 +146,7 @@ export default function Header() {
             variant="h6"
             noWrap
             component="div"
+            id='homeLink'
             sx={{ display: { xs: 'none', sm: 'block' } }}
             onClick={() => window.location.assign('/')}
           >

@@ -1335,6 +1335,10 @@ label form [type='radio'] {
   max-width: 100%;
 }
 
+#homeLink:hover {
+  cursor: pointer;
+}
+
 /* col-sm */
 @media screen and (min-width: 640px) {
   .col-sm-auto {
