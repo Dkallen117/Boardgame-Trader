@@ -100,18 +100,15 @@ const GameList = ({listings})  =>  {
   const handleListChange = (event) => {
     const selectName = event.target.name;
     const value = event.target.value;
-    let search;
-    let category
-    let sort
+    let search = results.searchTerm;;
+    let category = results.category;
+    let sort = results.sort;
     let list = [...listings];
 
     // If search terms are being entered
     if(selectName === 'search') {
       // Set the search var to the entered value
       search = value;
-    } else {
-      // Else use the saved value
-      search = results.searchTerm;
     }
 
     // If search terms exist
@@ -126,9 +123,6 @@ const GameList = ({listings})  =>  {
     if(selectName === 'category') {
       // Change the category into the value selected
       category = value;
-    } else {
-      // Else use the saved value
-      category = results.category;
     }
 
     // If a category is selected
@@ -141,9 +135,6 @@ const GameList = ({listings})  =>  {
     if(selectName === 'sort') {
       // Change the sort to the value selected
       sort = value;
-    } else {
-      // Else use the saved value
-      sort = results.sort;
     }
 
     // Determine how to sort with a switch
@@ -191,7 +182,7 @@ const GameList = ({listings})  =>  {
     <Grid container spacing={2} sx={{ p: '2%' }}>
 
       <Grid item xs={12}>
-        <Search fullWidth>
+        <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -230,11 +221,9 @@ const GameList = ({listings})  =>  {
             name='sort'
             onChange={handleListChange}
             >
-            <MenuItem value={''}>None</MenuItem>
-            <MenuItem value={'AA'}>Alphabetical: A-Z</MenuItem>
-            <MenuItem value={'AD'}>Alphabetical: Z-A</MenuItem>
-            <MenuItem value={'PA'}>Price: Low to High</MenuItem>
-            <MenuItem value={'PD'}>Price: High to Low</MenuItem>
+            {sorting.sortOptions.map((option, i) => (
+              <MenuItem value={option.value} key={i}>{option.text}</MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Grid>

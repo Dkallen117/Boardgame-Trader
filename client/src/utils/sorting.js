@@ -17,7 +17,30 @@ const sorting = {
         if(xPrice < yPrice) {return -1;}
         if(xPrice > yPrice) {return 1;}
         return 0;
-    }
+    },
+    // Variables for the sort select
+    sortOptions: [
+        {
+            value: '',
+            text: 'None'
+        },
+        {
+            value: 'AA',
+            text: 'Alphabetical: A-Z'
+        },
+        {
+            value: 'AD',
+            text: 'Alphabetical: Z-A'
+        },
+        {
+            value: 'PA',
+            text: 'Price: Low to High'
+        },
+        {
+            value: 'PD',
+            text: 'Price: High to Low'
+        },
+    ]
 }
 
 export default sorting;

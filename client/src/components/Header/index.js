@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { useQuery } from '@apollo/client';
-import { QUERY_SINGLE_LISTING } from '../../utils/queries';
 import { Link } from 'react-router-dom';
 
 import Auth from '../../utils/auth';
@@ -69,7 +63,21 @@ export default function Header() {
     >
       <MenuItem onClick={handleMenuClose} 
           component={Link} 
-          to="/profile" >Profile</MenuItem>
+          to="/profile"
+      > Profile
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose} 
+          component={Link} 
+          to="/OrderList"
+      > My Listings
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose} 
+          component={Link} 
+          to="/favorites"
+      > Saved Items
+      </MenuItem>
 
       <MenuItem onClick={handleMoveToNew}>Create New Listing</MenuItem>
 
@@ -138,6 +146,7 @@ export default function Header() {
             variant="h6"
             noWrap
             component="div"
+            id='homeLink'
             sx={{ display: { xs: 'none', sm: 'block' } }}
             onClick={() => window.location.assign('/')}
           >
