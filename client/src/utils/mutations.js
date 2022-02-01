@@ -104,3 +104,18 @@ mutation removeFavorite($listingId: ID!) {
   }
 }
 `
+export const GET_MESSAGES = gql`
+  subscription {
+    messages {
+      id
+      username
+      text
+    }
+  }
+`
+
+export const POST_MESSAGE = gql`
+  mutation($username:String!, $text:String!){
+    postMessage(username:$username,text:$text)
+  }
+`

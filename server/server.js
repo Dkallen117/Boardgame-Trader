@@ -1,6 +1,12 @@
+import { createServer } from 'http';
+import { execute, subscribe } from 'graphql';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { PubSub } from 'graphql-subscriptions';
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
+
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
@@ -8,11 +14,37 @@ const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+const pubsub = new PubSub();
 
+
+const httpServer = createServer(app);
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+const subscriptionServer = SubscriptionServer.create({
+  // This is the `schema` we just created.
+  schema,
+  // These are imported from `graphql`.
+  execute,
+  subscribe,
+}, {
+  // This is the `httpServer` we created in a previous step.
+  server: httpServer,
+  // Pass a different path here if your ApolloServer serves at
+  // a different path.
+  path: '/graphql',
+});
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   context: authMiddleware,
+  context: { pubsub },
+  plugins: [{
+    async serverWillStart() {
+      return {
+        async drainServer() {
+          subscriptionServer.close();
+        }
+      };
+    }
+  }],
 });
 
 server.applyMiddleware({ app });
@@ -30,6 +62,10 @@ app.get('*', (req, res) => {
 
 db.once('open', () => {
   app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  });
+  httpServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });

@@ -1,10 +1,10 @@
 import React from 'react';
-import Dashboard from './Dashboard';
+import Chat from './Chat';
 
 export default function Messages() {
     return (
         <>
-            <Dashboard />
+            <Chat />
         </>
         
     )

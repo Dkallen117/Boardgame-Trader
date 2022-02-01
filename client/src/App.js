@@ -21,6 +21,15 @@ import Setting from './pages/Setting';
 import Favorites from './pages/Favorites';
 import Messenger from './pages/Messenger';
 import Listing from './pages/Listing';
+import { WebSocketLink } from "@apollo/client/link/ws";
+
+
+const webLink = new WebSocketLink({
+  uri: `ws://localhost:3000/`,
+  options: {
+    reconnect: true,
+  },
+});
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,6 +49,7 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
+  webLink,
   cache: new InMemoryCache(),
 });
 
