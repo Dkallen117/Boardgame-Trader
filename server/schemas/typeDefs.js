@@ -22,6 +22,12 @@ const typeDefs = gql`
     img: String
   }
 
+  type Message {
+    id: ID!
+    user: String!
+    text: String!
+  }
+
   input ListingInput {
     title: String
     description: String
@@ -41,6 +47,7 @@ const typeDefs = gql`
     listings: [Listing]!
     user(userId: ID!): User
     listing(listingId: ID!): Listing
+    messages: [Message!]
     me: User
   }
 
@@ -52,7 +59,12 @@ const typeDefs = gql`
     removeListing(listingId: ID!): User
     addFavorite(listingId: ID!): User
     removeFavorite(listingId: ID!): User
+    postMessage(username: String!, text: String!): ID!
     removeUser: User
+  }
+
+  type Subscription {
+    messages: [Message!]
   }
 `;
 

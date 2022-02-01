@@ -1,6 +1,11 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Listing } = require('../models');
 const { signToken } = require('../utils/auth');
+const { PubSub } = require("graphql-subscriptions");
+
+const messages = [];
+const subscribers = [];
+const onMessagesUpdates = (fn) => subscribers.push(fn);
 
 const resolvers = {
   Query: {
@@ -23,6 +28,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    messages: async () => messages, //returns messages
   },
 
   Mutation: {
@@ -112,6 +118,26 @@ const resolvers = {
         return User.findOneAndDelete({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    postMessage: (parent, { username, text }) => {
+      const id = messages.length;
+      messages.push({
+        _id,
+        username,
+        text,
+      });
+      subscribers.forEach((fn) => fn());
+      return id;
+    },
+  },
+  Subscription: {
+    messages: {
+      subscribe: (parent, args, { pubsub }) => {
+        const channel = Math.random().toString(36).slice(2, 15);
+        onMessagesUpdates(() => pubsub.publish(channel, { messages }));
+        setTimeout(() => pubsub.publish(channel, { messages }), 0);
+        return pubsub.asyncIterator(channel);
+      },
     },
   },
 };
