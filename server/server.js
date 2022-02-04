@@ -1,8 +1,8 @@
-import { createServer } from 'http';
-import { execute, subscribe } from 'graphql';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { PubSub } from 'graphql-subscriptions';
+const { createServer } = require ('http');
+const { execute, subscribe } = require ('graphql');
+const { SubscriptionServer } = require ('subscriptions-transport-ws');
+const { makeExecutableSchema } = require ('@graphql-tools/schema');
+const { PubSub } = require ('graphql-subscriptions');
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
@@ -22,7 +22,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 const subscriptionServer = SubscriptionServer.create({
   // This is the `schema` we just created.
   schema,
-  // These are imported from `graphql`.
+  // These are imported = require `graphql`.
   execute,
   subscribe,
 }, {
@@ -30,7 +30,7 @@ const subscriptionServer = SubscriptionServer.create({
   server: httpServer,
   // Pass a different path here if your ApolloServer serves at
   // a different path.
-  path: '/graphql',
+  path: '/subscriptions',
 });
 const server = new ApolloServer({
   schema,
@@ -45,9 +45,19 @@ const server = new ApolloServer({
       };
     }
   }],
+  subscriptions: {
+    path: '/subscriptions',
+    onConnect: (connectionParams, webSocket, context) => {
+      console.log('Client connected');
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log('Client disconnected')
+    },
+  },
 });
 
 server.applyMiddleware({ app });
+server.installSubscriptionHandlers(httpServer);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -61,12 +71,15 @@ app.get('*', (req, res) => {
 });
 
 db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-  });
+  // app.listen(PORT, () => {
+  //   console.log(`API server running on port ${PORT}!`);
+  //   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  // });
   httpServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+    console.log(
+      `Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`,
+    );
   });
 });
