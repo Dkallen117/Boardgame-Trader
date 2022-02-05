@@ -5,6 +5,7 @@ const { makeExecutableSchema } = require ('@graphql-tools/schema');
 const { PubSub } = require ('graphql-subscriptions');
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+const { Server } = require('socket.io');
 const path = require('path');
 
 
@@ -18,6 +19,7 @@ const pubsub = new PubSub();
 
 
 const httpServer = createServer(app);
+const io = new Server(httpServer, {});
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const subscriptionServer = SubscriptionServer.create({
   // This is the `schema` we just created.
@@ -62,6 +64,8 @@ server.installSubscriptionHandlers(httpServer);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
@@ -75,6 +79,9 @@ db.once('open', () => {
   //   console.log(`API server running on port ${PORT}!`);
   //   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   // });
+  io.on('connection', (socket) => {
+    console.log(socket.id);
+  });
   httpServer.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
@@ -82,4 +89,6 @@ db.once('open', () => {
       `Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`,
     );
   });
+
+
 });
