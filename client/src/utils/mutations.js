@@ -107,7 +107,7 @@ mutation removeFavorite($listingId: ID!) {
 export const GET_MESSAGES = gql`
   subscription {
     messages {
-      id
+      _id
       username
       text
     }

@@ -4,6 +4,7 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
+  split
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -22,10 +23,21 @@ import Favorites from './pages/Favorites';
 import Messenger from './pages/Messenger';
 import Listing from './pages/Listing';
 import { WebSocketLink } from "@apollo/client/link/ws";
+import { io } from "socket.io-client";
+import { getMainDefinition } from '@apollo/client/utilities';
 
+const socket = io(`http://localhost:3000`);
+
+socket.on("connect", () => {
+  console.log(socket.connected); // true
+});
+
+socket.on("disconnect", () => {
+  console.log(socket.connected); // false
+});
 
 const webLink = new WebSocketLink({
-  uri: `ws://localhost:3000/`,
+  uri: `ws://localhost:3000`,
   options: {
     reconnect: true,
   },
@@ -34,7 +46,6 @@ const webLink = new WebSocketLink({
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
-
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
@@ -47,9 +58,23 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
   webLink,
+  httpLink,
+  authLink.concat(httpLink),
+);
+
+
+
+const client = new ApolloClient({
+  link: splitLink,
   cache: new InMemoryCache(),
 });
 
